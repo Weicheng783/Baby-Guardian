@@ -1,0 +1,209 @@
+<resources>
+    <string name="app_name">Baby Guardian</string>
+    <string name="back_button">Back</string>
+    <string name="appwidget_text">Baby Guardian</string>
+    <string name="version">240219</string>
+    <string name="build_type">beta</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="team_info">Team Baby Guardian: Weicheng Ao - Software; John Chen - Hardware; Yi Fang - Baby Crying Model; Yanzhi Shu - Baby Facial Expression Model; Kei Nagai - Hardware and ML Models</string>
+    <string name="settings">Settings</string>
+    <string name="edit">Edit</string>
+    <string name="people">People</string>
+    <string name="download_original_file">Download Original File</string>
+    <string name="check_internet_text">Please check your internet connection and try again.</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="last_sentence">Thanks for using Baby Guardian</string>
+    <string name="acknowledgments">Team Baby Guardian, 2024.</string>
+    <string name="contributions"><![CDATA[Designed & Developed by Team Baby Guardian 2024]]></string>
+    <string name="server_disconnected">Server Disconnected</string>
+    <string name="affirm_1">Beautiful moments unfold whenever you choose to embrace positivity.</string>
+    <string name="affirm_2">Positive vibes radiate with each instance of your cheerful demeanor.</string>
+    <string name="affirm_3">Joyful occurrences manifest whenever the glow of happiness graces your face.</string>
+    <string name="affirm_4">Remarkable opportunities arise whenever you venture beyond your comfort zone.</string>
+    <string name="affirm_5">Creativity flourishes in the midst of curiosity and a willingness to explore new ideas.</string>
+    <string name="affirm_6">Growth unfolds when challenges are faced with resilience and a determination to learn.</string>
+    <string name="affirm_7">Meaningful connections blossom through open communication and genuine understanding.</string>
+    <string name="affirm_8">Success often accompanies hard work, perseverance, and a commitment to excellence.</string>
+    <string name="affirm_9">Wisdom emerges from the experiences that shape your perspective and insight.</string>
+    <string name="affirm_10">Innovation thrives when minds collaborate, bringing diverse ideas to the table.</string>
+    <string name="title_main">Welcome to Baby Guardian</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="select_date">Select Date</string>
+    <string name="change_date">Change Date</string>
+    <string name="software_updates_source_code"><![CDATA[Software Updates]]></string>
+    <string name="join_weicheng_log_beta_program">Join Baby Guardian beta program</string>
+    <string name="beta_notice">Beta Program has more advanced features and more frequent updates but more likely to encounter bugs.</string>
+    <string name="language">Language</string>
+    <string name="latest_version">"Latest Version: "</string>
+    <string name="version_update_notes">Version Update Notes: \n</string>
+    <string name="source_code">Source Code</string>
+    <string name="server_disconnected_simple">Server Disconnected</string>
+    <string name="current_version">"Current Version: "</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="developer_title">Developer</string>
+    <string name="server_connected_updates_available"><![CDATA[Server Connected & Updates Available]]></string>
+    <string name="download_upgrade_to_the_latest_stable"><![CDATA[Download & Upgrade to the Latest Stable]]></string>
+    <string name="server_connected_downgrades_available"><![CDATA[Server Connected & Downgrades Available]]></string>
+    <string name="download_reinstall_the_latest_version"><![CDATA[Download & Reinstall the Latest Version]]></string>
+    <string name="download_the_latest_version">Download the Latest Version</string>
+    <string name="server_connected_running_the_latest_version"><![CDATA[Server Connected & Running the latest version]]></string>
+    <string name="good_night">Good Night 🌜💤</string>
+    <string name="good_morning_early">Good Morning 🌞💫</string>
+    <string name="good_morning_late">Good Morning 🌞💫</string>
+    <string name="good_afternoon">Good Afternoon 🌝</string>
+    <string name="good_evening">Good Evening 🌠</string>
+    <string name="cellular_or_metered_network_detected">Cellular or Metered Network Detected</string>
+    <string name="no_cellular_allowed">Cellular/Metered Networks Not Allowed</string>
+    <string name="no_cellular_allowed_description">This program does not support the use of such networks for the time being, because photos and texts are retrieved from the Internet frequently, in order to save your communication costs please try again in the Wifi environment.</string>
+    <string name="source_update_notes">Full Release Notes</string>
+    <string name="in_beta">in Beta</string>
+    <string name="opensourceinfo">This program is closed-source, copyright reserved.</string>
+    <string name="account">Account</string>
+    <string name="liveView">Live View</string>
+    <string name="liveViewer">LiveView/1</string>
+    <string name="hours_and_minutes_ago">%d hours and %d minutes ago</string>
+    <string name="days_and_hours_and_minutes_ago">%d days, %d hours, and %d minutes ago</string>
+    <string name="update_enforcing">Software Update Enforcing</string>
+    <string name="sensor">Sensors</string>
+    <string name="your_day_is_clear_for_now_nothing_needs_attention_have_a_wonderful_day">Your day is clear for now, nothing needs attention, have a wonderful day! 😀🥰💫</string>
+    <string name="alert">"Alert: "</string>
+    <string name="audio_playback">Audio Playback</string>
+    <string name="open_in_browser">Open in Browser</string>
+    <string name="you_need_to_back_and_reenter_to_confirm">🤫 You need to back and reenter to confirm 🤭</string>
+    <string name="quicker">Quicker</string>
+    <string name="slower">Slower</string>
+    <string name="update_frequency_now">"Update Frequency: Now: "</string>
+    <string name="seconds_per_update">" seconds per update."</string>
+    <string name="draw_two_lines_into_one_graph">Draw two lines into one graph</string>
+    <string name="only_owner_can_set_controls_and_dismiss_notifications">Only owner can set controls and dismiss notifications</string>
+    <string name="you_are_the">"You are the "</string>
+    <string name="live_sensor_data_for">"Live Sensor Data for: "</string>
+    <string name="restart_device">Restart Device</string>
+    <string name="add_a_friend">Add a friend</string>
+    <string name="remove_this_device">Remove this device</string>
+    <string name="remove_this_shared_device">Remove this shared device</string>
+    <string name="remove_all_shared_friends">Remove all shared friends</string>
+    <string name="serial_number">"Serial Number: "</string>
+    <string name="activation_date">"Activation Date: "</string>
+    <string name="no_devices_found_for_this_user">No devices found for this user.</string>
+    <string name="to_register_new_device">To Register New Device</string>
+    <string name="enter_your_wifi_details_and_update_qr">Enter your WiFi details and update QR</string>
+    <string name="put_product_s_camera_to_the_qr_code">Point Product\'s Camera directly to the QR Code.</string>
+    <string name="friends_reset">⚠️ Friends Reset</string>
+    <string name="remove_shared_device">⚠️ Remove Shared Device</string>
+    <string name="are_you_sure_you_want_to_reset_all_friends_remove_all_shared_friends">Are you sure you want to reset all friends (remove all shared friends)?</string>
+    <string name="are_you_sure_you_want_to_remove_this_shared_device_from_your_account">Are you sure you want to remove this shared device from your account?</string>
+    <string name="confirm_button">Confirm</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="device_removal">⚠️ Device Removal</string>
+    <string name="are_you_sure_you_want_to_remove_this_device_from_your_account">⚠️ Are you sure you want to remove this device from your account?</string>
+    <string name="friend_sharing">Friend Sharing</string>
+    <string name="are_you_sure_you_want_to_share_this_device_with">Are you sure you want to share this device with: %1$s?</string>
+    <string name="friend_invitation_sent">Friend Invitation Sent</string>
+    <string name="your_friend_sharing_invitation_has_been_sent_yes">Your friend sharing invitation has been sent! Yes!</string>
+    <string name="okay_nice">Okay, nice</string>
+    <string name="restart_device_note">⚠️ Restart Device ?</string>
+    <string name="are_you_sure_you_want_to_restart_the_device_we_are_strongly_advise_you_check_if_there_any_support_running_on_that_device_and_device_restart_can_cause_sudden_drop_in_service_but_if_you_are_experiencing_any_continuous_delay_or_no_result_from_sensors_restart_may_help">Are you sure you want to restart the device? We are strongly advise you check if there any support running on that device, and device restart can cause sudden drop in service. But if you are experiencing any continuous delay or no result from sensors, restart may help.</string>
+    <string name="friend_user_name">Friend User Name</string>
+    <string name="add_a_new_device_or_configure_wifi">Add a new device or Configure WiFi</string>
+    <string name="hide_configuration">Hide Configuration</string>
+    <string name="wifi_ssid">WiFi SSID</string>
+    <string name="wifi_password">WiFi Password</string>
+    <string name="show_qr_code">Show QR Code</string>
+    <string name="update_qr_code">Update QR Code</string>
+    <string name="hide_qr_code">Hide QR Code</string>
+    <string name="please_keep_on_full_brightness_and_place_your_phone_parallel_to_the_device_until_you_hear_a_medium_pitched_beep">Please keep on full brightness, and place your phone parallel to the device\'s camera until you hear a medium-pitched beep.</string>
+    <string name="device_offline">Device Offline</string>
+    <string name="your_device_is_currently_offline_power_on_the_device_for_connecting_to_a_nearby_wifi_access_point_if_the_issue_persists_reconfigure_the_wifi_by_showing_the_qr_code_to_the_target_device_s_camera_your_device_is_capable_for_auto_connecting_the_correct_wifi_once_the_correct_qr_is_being_detected">Your device is currently offline, power on the device for connecting to a nearby WiFi Access Point. If the issue persists, reconfigure the WiFi by showing the QR code to the target device\'s camera. Your device is capable for auto-connecting the correct WiFi once the correct QR is being detected.</string>
+    <string name="last_seen">Last Seen: %1$s</string>
+    <string name="device_online">Device Online</string>
+    <string name="high_latency">High Latency</string>
+    <string name="device_may_be_offline">Device May be Offline</string>
+    <string name="you_have_not_select_anything_for_change">You have not select anything for change</string>
+    <string name="update_the_device_with_value">Update the device with %1$s, value %2$s?</string>
+    <string name="device_control_update">Device Control Update</string>
+    <string name="back">Back</string>
+    <string name="value_change_to">Value Change To</string>
+    <string name="submit">Traditional Password Login</string>
+    <string name="delay_time_is_normally_between_10_30_seconds_due_to_the_limited_bandwidth_of_our_server_if_you_are_experiencing_higher_delay_or_video_is_not_playing_blank_black_screen_stuck_please_refresh_the_page_or_this_indicates_the_device_is_currently_offline_if_the_issue_persists_restart_the_device_and_contact_us_as_a_last_resort">Delay Time is normally between 10-30 seconds due to the limited bandwidth of our server, if you are experiencing higher delay or video is not playing (blank/black screen/stuck), please refresh the page or this indicates the device is currently offline. If the issue persists, restart the device, and contact us as a last resort.</string>
+    <string name="live_audio_playback">Live Audio Playback</string>
+    <string name="baby_radio_station">Baby Radio Station</string>
+    <string name="live_streaming_for">Live Streaming for: %1$s</string>
+    <string name="you_are_the_1">You are the %1$s</string>
+    <string name="baby_guardian_device">Baby Guardian Device: %1$s</string>
+    <string name="log_out">Log out</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="unregistered_user_will_be_automatically_registered_into_the_system">Unregistered user will be automatically Registered into the System.</string>
+    <string name="login_successful">Login successful</string>
+    <string name="login_failed">Login failed</string>
+    <string name="software_update_enforcing">Software Update Enforcing</string>
+    <string name="dear_baby_guardian_you_must_install_this_software_update_to_continue_using_this_app_we_are_enforcing_this_because_we_have_major_updates_about_the_system_architecture_database_etc_and_the_latest_security_updates_please_catch_up_you_have_left_behind_see_you_in_the_next_update">Dear baby guardian, you must install this software update to continue using this app, we are enforcing this because we have major updates about the system architecture (database, etc), and the latest security updates. Please catch up, you have left behind, see you in the next update.</string>
+    <string name="humidity_threshold">"Humidity Threshold: "</string>
+    <string name="temperature_c">Temperature: %1$s °C</string>
+    <string name="humidity">Humidity: </string>
+    <string name="grant_notification_permission">Grant Notification Permission</string>
+    <string name="device_sensor_data">Device Sensor Data</string>
+    <string name="watch_live_stream">Watch Live Stream</string>
+    <string name="print_stack_trace">Print Stack Trace</string>
+    <string name="restart_application">Restart Application</string>
+    <string name="your_app_has_crashed_sorry_about_the_inconvenience_but_please_send_us_the_error_info_if_you_could">Your app has crashed, sorry about the inconvenience, but please send us the error info if you could.</string>
+    <string name="software_crash_happened">Software Crash Happened</string>
+    <string name="dropped_support_upto">"Dropped Support Upto: "</string>
+    <string name="welcome">"Welcome, "</string>
+    <string name="guest_mode">Guest Mode</string>
+    <string name="please_login_first">Please Login First</string>
+    <string name="journey_starts_from_login">Journey starts from login 🌞</string>
+    <string name="owner">owner</string>
+    <string name="friend">friend</string>
+    <string name="device_manual_controls">Device Manual Controls</string>
+    <string name="temperature_c_1">Temperature (°C)</string>
+    <string name="humidity_1">Humidity (%)</string>
+    <string name="gemini_how_to">Gemini How To</string>
+    <string name="hi_welcome_to_google_gemini_model_tester_this_is_a_generative_model_that_can_help_you_analyse_things_make_decisions_and_happier_throughout_your_life_for_input_type_in_what_you_want_to_ask_for_mode_type_in_full_or_image_and_given_an_image_url_from_internet_when_the_mode_is_image_double_check_the_answers_before_using_them_models_can_make_errors_technical_correspondence_john_chen_gemini_model_account_weicheng_ao_api_front_back_end"><![CDATA[Hi, welcome to Google Gemini Model Tester, this is a generative-model that can help you analyse things, make decisions and happier throughout your life. For input, type in what you want to ask; For mode, type in \"full\" or \"image\", and given an image URL (from Internet) when the mode is image. Double check the answers before using them, models can make errors.\nTechnical Correspondence: John Chen (Gemini Model Account), Weicheng Ao (API Front & Back-end)\nIntroduced: Feb.16th, 2024.]]></string>
+    <string name="always_double_check_the_answers_before_using_them_models_can_make_errors">Always double check the answers before using them, models can make errors.</string>
+    <string name="try_google_gemini">Try Google Gemini</string>
+    <string name="gemini_interpret_this_image">Gemini, interpret this image</string>
+    <string name="new_aa">NEW?</string>
+    <string name="hang_tight_we_are_processing">Hang tight, we are processing...</string>
+    <string name="image_uri_optional">Image URI (Optional)</string>
+    <string name="mode">Mode</string>
+    <string name="toggle_advanced_mode">Toggle Advanced Mode</string>
+    <string name="hide_advanced_mode">Hide Advanced Mode</string>
+    <string name="input">Input</string>
+    <string name="sign_in_with_saved_methods">Sign In With Saved Methods</string>
+    <string name="sign_up_with_passkey">Sign Up with Passkey</string>
+    <string name="create_passkey">Create Passkey</string>
+    <string name="registration_via_passkey_successful">Registration via Passkey Successful</string>
+    <string name="registration_failed_one_user_can_only_have_one_passkey_if_this_is_an_error_please_try_again">Registration Failed, one user can only have one Passkey, if this is an error, please try again.</string>
+    <array name="com_google_android_gms_fonts_certs">
+        <item>@array/com_google_android_gms_fonts_certs_dev</item>
+        <item>@array/com_google_android_gms_fonts_certs_prod</item>
+    </array>
+    <string-array name="com_google_android_gms_fonts_certs_dev">
+        <item>
+            MIIEqDCCA5CgAwIBAgIJANWFuGx90071MA0GCSqGSIb3DQEBBAUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAeFw0wODA0MTUyMzM2NTZaFw0zNTA5MDEyMzM2NTZaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBANbOLggKv+IxTdGNs8/TGFy0PTP6DHThvbbR24kT9ixcOd9W+EaBPWW+wPPKQmsHxajtWjmQwWfna8mZuSeJS48LIgAZlKkpFeVyxW0qMBujb8X8ETrWy550NaFtI6t9+u7hZeTfHwqNvacKhp1RbE6dBRGWynwMVX8XW8N1+UjFaq6GCJukT4qmpN2afb8sCjUigq0GuMwYXrFVee74bQgLHWGJwPmvmLHC69EH6kWr22ijx4OKXlSIx2xT1AsSHee70w5iDBiK4aph27yH3TxkXy9V89TDdexAcKk/cVHYNnDBapcavl7y0RiQ4biu8ymM8Ga/nmzhRKya6G0cGw8CAQOjgfwwgfkwHQYDVR0OBBYEFI0cxb6VTEM8YYY6FbBMvAPyT+CyMIHJBgNVHSMEgcEwgb6AFI0cxb6VTEM8YYY6FbBMvAPyT+CyoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJANWFuGx90071MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADggEBABnTDPEF+3iSP0wNfdIjIz1AlnrPzgAIHVvXxunW7SBrDhEglQZBbKJEk5kT0mtKoOD1JMrSu1xuTKEBahWRbqHsXclaXjoBADb0kkjVEJu/Lh5hgYZnOjvlba8Ld7HCKePCVePoTJBdI4fvugnL8TsgK05aIskyY0hKI9L8KfqfGTl1lzOv2KoWD0KWwtAWPoGChZxmQ+nBli+gwYMzM1vAkP+aayLe0a1EQimlOalO762r0GXO0ks+UeXde2Z4e+8S/pf7pITEI/tP+MxJTALw9QUWEv9lKTk+jkbqxbsh8nfBUapfKqYn0eidpwq2AzVp3juYl7//fKnaPhJD9gs=
+        </item>
+    </string-array>
+    <string-array name="com_google_android_gms_fonts_certs_prod">
+        <item>
+            MIIEQzCCAyugAwIBAgIJAMLgh0ZkSjCNMA0GCSqGSIb3DQEBBAUAMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDAeFw0wODA4MjEyMzEzMzRaFw0zNjAxMDcyMzEzMzRaMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAKtWLgDYO6IIrgqWbxJOKdoR8qtW0I9Y4sypEwPpt1TTcvZApxsdyxMJZ2JORland2qSGT2y5b+3JKkedxiLDmpHpDsz2WCbdxgxRczfey5YZnTJ4VZbH0xqWVW/8lGmPav5xVwnIiJS6HXk+BVKZF+JcWjAsb/GEuq/eFdpuzSqeYTcfi6idkyugwfYwXFU1+5fZKUaRKYCwkkFQVfcAs1fXA5V+++FGfvjJ/CxURaSxaBvGdGDhfXE28LWuT9ozCl5xw4Yq5OGazvV24mZVSoOO0yZ31j7kYvtwYK6NeADwbSxDdJEqO4k//0zOHKrUiGYXtqw/A0LFFtqoZKFjnkCAQOjgdkwgdYwHQYDVR0OBBYEFMd9jMIhF1Ylmn/Tgt9r45jk14alMIGmBgNVHSMEgZ4wgZuAFMd9jMIhF1Ylmn/Tgt9r45jk14aloXikdjB0MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLR29vZ2xlIEluYy4xEDAOBgNVBAsTB0FuZHJvaWQxEDAOBgNVBAMTB0FuZHJvaWSCCQDC4IdGZEowjTAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBAUAA4IBAQBt0lLO74UwLDYKqs6Tm8/yzKkEu116FmH4rkaymUIE0P9KaMftGlMexFlaYjzmB2OxZyl6euNXEsQH8gjwyxCUKRJNexBiGcCEyj6z+a1fuHHvkiaai+KL8W1EyNmgjmyy8AW7P+LLlkR+ho5zEHatRbM/YAnqGcFh5iZBqpknHf1SKMXFh4dd239FJ1jWYfbMDMy3NS5CTMQ2XFI1MvcyUTdZPErjQfTbQe3aDQsQcafEQPD+nqActifKZ0Np0IS9L9kR/wbNvyz6ENwPiTrjV2KRkEjH78ZMcUQXg0L3BYHJ3lc69Vs5Ddf9uUGGMYldX3WfMBEmh/9iFBDAaTCK
+        </item>
+    </string-array>
+    <plurals name="seconds_ago">
+        <item quantity="one">%d second ago</item>
+        <item quantity="other">%d seconds ago</item>
+    </plurals>
+
+    <plurals name="minutes_ago">
+        <item quantity="one">%d minute ago</item>
+        <item quantity="other">%d minutes ago</item>
+    </plurals>
+
+<!--    <string name="asset_statements" translatable="false">-->
+<!--    [{-->
+<!--      \"include\": \"https://weicheng.app/.well-known/assetlinks.json\"-->
+<!--    }]-->
+<!--    </string>-->
+</resources>

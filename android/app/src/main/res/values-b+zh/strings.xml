@@ -1,0 +1,209 @@
+<resources>
+    <string name="app_name">宝贝卫士</string>
+    <string name="back_button">返回</string>
+    <string name="appwidget_text">宝贝卫士</string>
+    <string name="version">240219</string>
+    <string name="build_type">beta</string>
+    <string name="app_widget_description">这是小组件的说明</string>
+    <string name="team_info">宝贝卫士团队: Weicheng Ao - Software; John Chen - Hardware; Yi Fang - Baby Crying Model; Yanzhi Shu - Baby Facial Expression Model; Kei Nagai - Hardware and ML Models</string>
+    <string name="settings">设置</string>
+    <string name="edit">编辑</string>
+    <string name="people">好友</string>
+    <string name="download_original_file">下载原图</string>
+    <string name="check_internet_text">请检查网络连接，然后再试一次。</string>
+    <string name="no_internet_connection">没网啦！</string>
+    <string name="last_sentence">感谢使用宝贝卫士，我们会一直努力。</string>
+    <string name="acknowledgments">宝贝卫士团队 2024</string>
+    <string name="contributions"><![CDATA[由宝贝卫士团队设计开发]]></string>
+    <string name="server_disconnected">服务器断开连接</string>
+    <string name="affirm_1">当你选择拥抱积极的一面时，美好的时刻就会如期而至。</string>
+    <string name="affirm_2">你每一次乐观的态度都能让身边的事物变得更积极。</string>
+    <string name="affirm_3">每当幸福的光辉照耀你的脸时，就会发生快乐的事情。</string>
+    <string name="affirm_4">每当你走出舒适区，非凡的机会就会出现。</string>
+    <string name="affirm_5">创造力在好奇心和探索新想法的意愿中蓬勃发展。</string>
+    <string name="affirm_6">当你面对挑战时，学习的韧性和决心会得到增强。</string>
+    <string name="affirm_7">通过开放的沟通和真诚的理解，有意义的关系会开花结果。</string>
+    <string name="affirm_8">成功往往伴随着努力探索、坚持不懈和追求卓越的决心。</string>
+    <string name="affirm_9">智慧来自于塑造你的观点和洞察力的经历。</string>
+    <string name="affirm_10">当我们在思想上协作，将不同的想法摆上桌面时，新的解题方向就会打开。</string>
+    <string name="title_main">(｡･∀･)ﾉﾞ嗨，这里是宝贝卫士</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="select_date">选择日期</string>
+    <string name="change_date">更改日期</string>
+    <string name="software_updates_source_code"><![CDATA[软件更新]]></string>
+    <string name="join_weicheng_log_beta_program">加入宝贝卫士测试版(Beta)计划</string>
+    <string name="beta_notice">测试版程序有更高级的功能和更频繁的更新，但更容易遇到错误。</string>
+    <string name="language">语言</string>
+    <string name="latest_version">"最新版本: "</string>
+    <string name="version_update_notes">版本更新日志: \n</string>
+    <string name="source_code">查看源代码</string>
+    <string name="server_disconnected_simple">服务器已断开</string>
+    <string name="current_version">"此版本: "</string>
+    <string name="dismiss">知道了</string>
+    <string name="developer_title">开发者信息</string>
+    <string name="server_connected_updates_available"><![CDATA[服务器已连接,有更新可用]]></string>
+    <string name="download_upgrade_to_the_latest_stable"><![CDATA[下载并升级到最新的稳定版]]></string>
+    <string name="server_connected_downgrades_available"><![CDATA[服务器已连接，有降级可用]]></string>
+    <string name="download_reinstall_the_latest_version"><![CDATA[下载并重新安装最新版本]]></string>
+    <string name="download_the_latest_version">下载最新版本</string>
+    <string name="server_connected_running_the_latest_version"><![CDATA[服务器已连接,并正在运行最新版本]]></string>
+    <string name="good_night">晚安哦 🌜💤</string>
+    <string name="good_morning_early">早上好呀 🌞💫</string>
+    <string name="good_morning_late">上午好哒 🌈🌞</string>
+    <string name="good_afternoon">下午好呢 🌝</string>
+    <string name="good_evening">晚上好 🌠</string>
+    <string name="cellular_or_metered_network_detected">检测到流量或计费网络</string>
+    <string name="no_cellular_allowed">程序不允许使用流量网络</string>
+    <string name="no_cellular_allowed_description">这个程序暂时不支持使用流量访问，因为照片和文字的加载频繁，为了节约你的通信费用请在Wifi环境下重试。</string>
+    <string name="source_update_notes">查看完整更新日志</string>
+    <string name="in_beta">测试版</string>
+    <string name="opensourceinfo">本项目暂未开源</string>
+    <string name="account">用户</string>
+    <string name="liveView">直播流</string>
+    <string name="liveViewer">直播流/1</string>
+    <string name="hours_and_minutes_ago">%d 小时 %d 分钟 前</string>
+    <string name="days_and_hours_and_minutes_ago">%d 天 %d 小时 %d 分钟前</string>
+    <string name="update_enforcing">强制软件更新</string>
+    <string name="sensor">传感器</string>
+    <string name="your_day_is_clear_for_now_nothing_needs_attention_have_a_wonderful_day">目前没有需要注意的事情，去感受生活的小美好吧! 😀🥰💫</string>
+    <string name="alert">"提醒: "</string>
+    <string name="audio_playback">声音播放</string>
+    <string name="open_in_browser">在浏览器中打开</string>
+    <string name="you_need_to_back_and_reenter_to_confirm">🤫 你需要重新进入页面才能应用更新 🤭</string>
+    <string name="quicker">更快</string>
+    <string name="slower">更慢</string>
+    <string name="update_frequency_now">"现在刷新频率: "</string>
+    <string name="seconds_per_update">" 秒每次."</string>
+    <string name="draw_two_lines_into_one_graph">把两条线画到同一个图中</string>
+    <string name="only_owner_can_set_controls_and_dismiss_notifications">只有机主才能控制和清除通知</string>
+    <string name="you_are_the">"你是 "</string>
+    <string name="live_sensor_data_for">"正在接收传感器: "</string>
+    <string name="restart_device">重启设备</string>
+    <string name="add_a_friend">添加这个朋友</string>
+    <string name="remove_this_device">移除该设备</string>
+    <string name="remove_this_shared_device">移除该共享设备</string>
+    <string name="remove_all_shared_friends">清空所有共享好友</string>
+    <string name="serial_number">"序列号: "</string>
+    <string name="activation_date">"激活日: "</string>
+    <string name="no_devices_found_for_this_user">我们没有找到你的设备.</string>
+    <string name="to_register_new_device">要注册一个新的设备</string>
+    <string name="enter_your_wifi_details_and_update_qr">请输入你的无线网络信息和刷新二维码</string>
+    <string name="put_product_s_camera_to_the_qr_code">请把设备的摄像头对准二维码.</string>
+    <string name="friends_reset">⚠️ 好友清空</string>
+    <string name="remove_shared_device">⚠️ 移除该共享设备</string>
+    <string name="are_you_sure_you_want_to_reset_all_friends_remove_all_shared_friends">你希望重置(清空)所有好友么?</string>
+    <string name="are_you_sure_you_want_to_remove_this_shared_device_from_your_account">你真的想要移除这个共享给你的设备么?</string>
+    <string name="confirm_button">确认</string>
+    <string name="cancel_button">取消</string>
+    <string name="device_removal">⚠️ 设备移除</string>
+    <string name="are_you_sure_you_want_to_remove_this_device_from_your_account">⚠️ 你确认想从你的账户中删除这台设备么，删除后必须重新注册?</string>
+    <string name="friend_sharing">好友共享</string>
+    <string name="are_you_sure_you_want_to_share_this_device_with">你真的想把你的设备观看权限共享给: %1$s 吗?</string>
+    <string name="friend_invitation_sent">已发送好友邀请</string>
+    <string name="your_friend_sharing_invitation_has_been_sent_yes">啊哈哈! 好友邀请已经发送啦！</string>
+    <string name="okay_nice">这很好</string>
+    <string name="restart_device_note">⚠️ 重启设备 ?</string>
+    <string name="are_you_sure_you_want_to_restart_the_device_we_are_strongly_advise_you_check_if_there_any_support_running_on_that_device_and_device_restart_can_cause_sudden_drop_in_service_but_if_you_are_experiencing_any_continuous_delay_or_no_result_from_sensors_restart_may_help">你确定要重新启动设备吗? 我们强烈建议您检查该设备上是否有任何重要服务正在运行，并且设备重启会导致所有服务突然停止。但如果你遇到任何持续的延迟或传感器一直没有结果，重新启动可能会有所帮助。</string>
+    <string name="friend_user_name">好友用户名</string>
+    <string name="add_a_new_device_or_configure_wifi">添加一个新的设备 或 更新网络信息</string>
+    <string name="hide_configuration">收起配置</string>
+    <string name="wifi_ssid">无线网络名称(SSID)</string>
+    <string name="wifi_password">密钥</string>
+    <string name="show_qr_code">展示二维码</string>
+    <string name="update_qr_code">更新二维码</string>
+    <string name="hide_qr_code">隐藏二维码</string>
+    <string name="please_keep_on_full_brightness_and_place_your_phone_parallel_to_the_device_until_you_hear_a_medium_pitched_beep">请保持最大亮度，并将你的手机与设备摄像头平行，直到你听到一个中等音调的哔哔声。</string>
+    <string name="device_offline">设备离线</string>
+    <string name="your_device_is_currently_offline_power_on_the_device_for_connecting_to_a_nearby_wifi_access_point_if_the_issue_persists_reconfigure_the_wifi_by_showing_the_qr_code_to_the_target_device_s_camera_your_device_is_capable_for_auto_connecting_the_correct_wifi_once_the_correct_qr_is_being_detected">你的设备目前处于离线状态，请打开设备连接到附近的WiFi接入点。如果问题仍然存在，通过向目标设备的摄像头显示二维码来重新配置WiFi。一旦检测到正确的二维码，你的设备能够自动连接正确的WiFi。</string>
+    <string name="last_seen">最近通信: %1$s</string>
+    <string name="device_online">设备在线</string>
+    <string name="high_latency">高延迟</string>
+    <string name="device_may_be_offline">设备可能掉线</string>
+    <string name="you_have_not_select_anything_for_change">你还没有选择任何需要改变的项目</string>
+    <string name="update_the_device_with_value">更新 %1$s 的数值到 %2$s?</string>
+    <string name="device_control_update">设备控制更新</string>
+    <string name="back">返回</string>
+    <string name="value_change_to">值变更到</string>
+    <string name="submit">传统密码登录</string>
+    <string name="delay_time_is_normally_between_10_30_seconds_due_to_the_limited_bandwidth_of_our_server_if_you_are_experiencing_higher_delay_or_video_is_not_playing_blank_black_screen_stuck_please_refresh_the_page_or_this_indicates_the_device_is_currently_offline_if_the_issue_persists_restart_the_device_and_contact_us_as_a_last_resort">由于我们的服务器带宽有限，延迟时间通常在10-30秒之间，如果您遇到更高的延迟或视频无法播放(卡屏/黑屏/卡顿)，请刷新页面或这表明设备当前离线。如果问题仍然存在，重新启动设备，并联系我们作为最后的手段。</string>
+    <string name="live_audio_playback">设备音频收听</string>
+    <string name="baby_radio_station">童学收音台</string>
+    <string name="live_streaming_for">正在观看: %1$s</string>
+    <string name="you_are_the_1">你是 %1$s</string>
+    <string name="baby_guardian_device">宝贝卫士: %1$s</string>
+    <string name="log_out">注销</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="unregistered_user_will_be_automatically_registered_into_the_system">未注册用户将自动注册到系统中。</string>
+    <string name="login_successful">你已成功登录</string>
+    <string name="login_failed">登录失败了</string>
+    <string name="software_update_enforcing">强制软件更新</string>
+    <string name="dear_baby_guardian_you_must_install_this_software_update_to_continue_using_this_app_we_are_enforcing_this_because_we_have_major_updates_about_the_system_architecture_database_etc_and_the_latest_security_updates_please_catch_up_you_have_left_behind_see_you_in_the_next_update">亲爱的宝贝卫士，你必须安装此软件更新才能继续使用此应用程序，我们正在强制执行此操作，因为我们对系统架构(数据库等)进行了比较大的更新，也打上最新的安全补丁。你已经掉队啦，请及时赶上，我们在新的版本中还能再见(｡･∀･)ﾉﾞ。</string>
+    <string name="humidity_threshold">湿度阈值: </string>
+    <string name="temperature_c">温度: %1$s °C</string>
+    <string name="humidity">湿度: %1$s %</string>
+    <string name="grant_notification_permission">更改应用通知权限</string>
+    <string name="device_sensor_data">设备传感器数据</string>
+    <string name="watch_live_stream">观看直播流</string>
+    <string name="print_stack_trace">打印错误信息到调试板</string>
+    <string name="restart_application">算了，重启应用</string>
+    <string name="your_app_has_crashed_sorry_about_the_inconvenience_but_please_send_us_the_error_info_if_you_could">你的应用程序崩溃了，很抱歉给你带来不便，但如果可以的话，请将错误信息发给我们。</string>
+    <string name="software_crash_happened">软件遇到bug错误啊</string>
+    <string name="dropped_support_upto">"此版本(前)需要更新: "</string>
+    <string name="welcome">"欢迎你, "</string>
+    <string name="guest_mode">客座模式</string>
+    <string name="please_login_first">要进行设备操作，请先登录</string>
+    <string name="journey_starts_from_login">美好的旅程从登录开始 🌞</string>
+    <string name="owner">机主</string>
+    <string name="friend">好友</string>
+    <string name="device_manual_controls">设备手动设置</string>
+    <string name="temperature_c_1">温度 (°C)</string>
+    <string name="humidity_1">湿度 (%)</string>
+    <string name="gemini_how_to">如何使用Gemini</string>
+    <string name="hi_welcome_to_google_gemini_model_tester_this_is_a_generative_model_that_can_help_you_analyse_things_make_decisions_and_happier_throughout_your_life_for_input_type_in_what_you_want_to_ask_for_mode_type_in_full_or_image_and_given_an_image_url_from_internet_when_the_mode_is_image_double_check_the_answers_before_using_them_models_can_make_errors_technical_correspondence_john_chen_gemini_model_account_weicheng_ao_api_front_back_end"><![CDATA[你好，欢迎使用Gemini模型测试器，Gemini是一个可生成内容的语言模型，可以帮助你分析问题、做决策，并会帮助你把你生活中的很多事情做的更简单。对于输入，请输入你想要询问的内容；对于模式，请输入“full”(全文字模式)或“image”(文字+图像)，在模式为图像时提供图像网址（来自互联网）。在使用答案之前，请仔细检查，模型可能会产生错误。\n技术联系人：John Chen（Gemini模型帐户持有人），Weicheng Ao（API前后端\n初步引入于2024年2月16日]]></string>
+    <string name="always_double_check_the_answers_before_using_them_models_can_make_errors">请仔细检查结果，语言模型生成的内容有可能会出现错误，概率还挺大的。</string>
+    <string name="try_google_gemini">尝试谷歌Gemini</string>
+    <string name="gemini_interpret_this_image">Gemini, 来看下这张图</string>
+    <string name="new_aa">这是?</string>
+    <string name="hang_tight_we_are_processing">请稍后，我们正在处理...</string>
+    <string name="image_uri_optional">图像的网络地址(可选填)</string>
+    <string name="mode">模式</string>
+    <string name="toggle_advanced_mode">高级模式</string>
+    <string name="hide_advanced_mode">收起高级模式</string>
+    <string name="input">文字输入</string>
+    <string name="sign_in_with_saved_methods">使用通行密钥或其它保存方式登录</string>
+    <string name="sign_up_with_passkey">直接使用通行密钥注册</string>
+    <string name="create_passkey">创建通行密钥</string>
+    <string name="registration_via_passkey_successful">通行密钥注册成功</string>
+    <string name="registration_failed_one_user_can_only_have_one_passkey_if_this_is_an_error_please_try_again">密钥注册失败，请确认你是否已经拥有密钥，如果没有，请重试。</string>
+    <array name="com_google_android_gms_fonts_certs">
+        <item>@array/com_google_android_gms_fonts_certs_dev</item>
+        <item>@array/com_google_android_gms_fonts_certs_prod</item>
+    </array>
+    <string-array name="com_google_android_gms_fonts_certs_dev">
+        <item>
+            MIIEqDCCA5CgAwIBAgIJANWFuGx90071MA0GCSqGSIb3DQEBBAUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAeFw0wODA0MTUyMzM2NTZaFw0zNTA5MDEyMzM2NTZaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBANbOLggKv+IxTdGNs8/TGFy0PTP6DHThvbbR24kT9ixcOd9W+EaBPWW+wPPKQmsHxajtWjmQwWfna8mZuSeJS48LIgAZlKkpFeVyxW0qMBujb8X8ETrWy550NaFtI6t9+u7hZeTfHwqNvacKhp1RbE6dBRGWynwMVX8XW8N1+UjFaq6GCJukT4qmpN2afb8sCjUigq0GuMwYXrFVee74bQgLHWGJwPmvmLHC69EH6kWr22ijx4OKXlSIx2xT1AsSHee70w5iDBiK4aph27yH3TxkXy9V89TDdexAcKk/cVHYNnDBapcavl7y0RiQ4biu8ymM8Ga/nmzhRKya6G0cGw8CAQOjgfwwgfkwHQYDVR0OBBYEFI0cxb6VTEM8YYY6FbBMvAPyT+CyMIHJBgNVHSMEgcEwgb6AFI0cxb6VTEM8YYY6FbBMvAPyT+CyoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJANWFuGx90071MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADggEBABnTDPEF+3iSP0wNfdIjIz1AlnrPzgAIHVvXxunW7SBrDhEglQZBbKJEk5kT0mtKoOD1JMrSu1xuTKEBahWRbqHsXclaXjoBADb0kkjVEJu/Lh5hgYZnOjvlba8Ld7HCKePCVePoTJBdI4fvugnL8TsgK05aIskyY0hKI9L8KfqfGTl1lzOv2KoWD0KWwtAWPoGChZxmQ+nBli+gwYMzM1vAkP+aayLe0a1EQimlOalO762r0GXO0ks+UeXde2Z4e+8S/pf7pITEI/tP+MxJTALw9QUWEv9lKTk+jkbqxbsh8nfBUapfKqYn0eidpwq2AzVp3juYl7//fKnaPhJD9gs=
+        </item>
+    </string-array>
+    <string-array name="com_google_android_gms_fonts_certs_prod">
+        <item>
+            MIIEQzCCAyugAwIBAgIJAMLgh0ZkSjCNMA0GCSqGSIb3DQEBBAUAMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDAeFw0wODA4MjEyMzEzMzRaFw0zNjAxMDcyMzEzMzRaMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAKtWLgDYO6IIrgqWbxJOKdoR8qtW0I9Y4sypEwPpt1TTcvZApxsdyxMJZ2JORland2qSGT2y5b+3JKkedxiLDmpHpDsz2WCbdxgxRczfey5YZnTJ4VZbH0xqWVW/8lGmPav5xVwnIiJS6HXk+BVKZF+JcWjAsb/GEuq/eFdpuzSqeYTcfi6idkyugwfYwXFU1+5fZKUaRKYCwkkFQVfcAs1fXA5V+++FGfvjJ/CxURaSxaBvGdGDhfXE28LWuT9ozCl5xw4Yq5OGazvV24mZVSoOO0yZ31j7kYvtwYK6NeADwbSxDdJEqO4k//0zOHKrUiGYXtqw/A0LFFtqoZKFjnkCAQOjgdkwgdYwHQYDVR0OBBYEFMd9jMIhF1Ylmn/Tgt9r45jk14alMIGmBgNVHSMEgZ4wgZuAFMd9jMIhF1Ylmn/Tgt9r45jk14aloXikdjB0MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLR29vZ2xlIEluYy4xEDAOBgNVBAsTB0FuZHJvaWQxEDAOBgNVBAMTB0FuZHJvaWSCCQDC4IdGZEowjTAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBAUAA4IBAQBt0lLO74UwLDYKqs6Tm8/yzKkEu116FmH4rkaymUIE0P9KaMftGlMexFlaYjzmB2OxZyl6euNXEsQH8gjwyxCUKRJNexBiGcCEyj6z+a1fuHHvkiaai+KL8W1EyNmgjmyy8AW7P+LLlkR+ho5zEHatRbM/YAnqGcFh5iZBqpknHf1SKMXFh4dd239FJ1jWYfbMDMy3NS5CTMQ2XFI1MvcyUTdZPErjQfTbQe3aDQsQcafEQPD+nqActifKZ0Np0IS9L9kR/wbNvyz6ENwPiTrjV2KRkEjH78ZMcUQXg0L3BYHJ3lc69Vs5Ddf9uUGGMYldX3WfMBEmh/9iFBDAaTCK
+        </item>
+    </string-array>
+    <plurals name="seconds_ago">
+        <item quantity="one">%d 秒前</item>
+        <item quantity="other">%d 秒前</item>
+    </plurals>
+
+    <plurals name="minutes_ago">
+        <item quantity="one">%d 分钟前</item>
+        <item quantity="other">%d 分钟前</item>
+    </plurals>
+
+<!--    <string name="asset_statements" translatable="false">-->
+<!--    [{-->
+<!--      \"include\": \"https://weicheng.app/.well-known/assetlinks.json\"-->
+<!--    }]-->
+<!--    </string>-->
+</resources>
