@@ -4,9 +4,13 @@
 
 Welcome to Baby-Guardian, a cutting-edge Android application built natively with **Jetpack Compose** in Kotlin. This app is designed to provide a comprehensive set of features to ensure the safety and well-being of your baby. From real-time monitoring to advanced controls, Baby-Guardian offers a seamless and intuitive experience.
 
-This App is designed for a course called "Designing Sensor Systems", and it is the companion software App designed by me with the collaboration with GPT3.5, to coordinate with our paired hardware and trained machine learning models, and the server.
+This App is designed for a course called "Designing Sensor Systems", and it is the **companion software** App designed by me with the collaboration with GPT3.5, to coordinate with our paired hardware and trained machine learning models, and the server.
 
 ![Slide2.PNG](Slide2.PNG)
+
+The hardware designed to interact with is: Raspberry Pi 4B with Raspberry Pi OS, Arduino Uno with Temperature and Humidity Sensors.
+
+![hardware.jpg](hardware.jpg)
 
 ## Beta Release Notes
 
