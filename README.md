@@ -6,11 +6,27 @@ Welcome to Baby-Guardian, a cutting-edge Android application built natively with
 
 This App is designed for a course called "Designing Sensor Systems", and it is the companion software App designed by me with the collaboration with GPT3.5, to coordinate with our paired hardware and trained machine learning models, and the server.
 
+![Slide2.PNG](Slide2.PNG)
+
+## Beta Release Notes
+
+https://weicheng.app/baby_guardian/downloads/baby_guardian_apis_240219.pdf
+
 ## Features
+
+![Slide9.PNG](Slide9.PNG)
 
 ### Responsive, Intuitive, Inclusive & Material UI
 
 Baby-Guardian boasts a user-friendly interface that adapts to various screen sizes, ensuring a responsive experience. The design prioritizes intuitiveness for users of all levels, making it inclusive for everyone. The Material UI components contribute to a visually pleasing and consistent design language.
+
+![Slide10.PNG](Slide10.PNG)
+
+![Slide11.PNG](Slide11.PNG)
+
+![Slide12.PNG](Slide12.PNG)
+
+![Slide13.PNG](Slide13.PNG)
 
 ### Software Updater
 
