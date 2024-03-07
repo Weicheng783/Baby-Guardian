@@ -29,18 +29,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
-        overrideActivityTransition(
-            OVERRIDE_TRANSITION_OPEN,
-            android.R.anim.fade_in,
-            0
-        )
-
-        overrideActivityTransition(
-            OVERRIDE_TRANSITION_CLOSE,
-            0,
-            android.R.anim.fade_out
-        )
 //        val config = resources.configuration
 //        val lang = "en"
 //        val locale = Locale(lang)

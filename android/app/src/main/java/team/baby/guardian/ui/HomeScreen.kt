@@ -298,6 +298,8 @@ fun HomeScreen(
                     GeminiUI("full","","",false)
                 }
 
+                UnrealViewer()
+
                 Text(
                     text = stringResource(R.string.contributions),
                     fontSize = 20.sp,

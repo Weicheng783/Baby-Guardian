@@ -836,7 +836,7 @@ data class NotificationItem(
 )
 
 // Example dismissNotification function
-private fun dismissNotification(deviceSerial: String, notificationId: String, onDismissed: () -> Unit) {
+fun dismissNotification(deviceSerial: String, notificationId: String, onDismissed: () -> Unit) {
     val url = "https://weicheng.app/baby_guardian/alert.php"
     val client = OkHttpClient()
 

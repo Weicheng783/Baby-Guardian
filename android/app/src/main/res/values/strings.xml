@@ -2,7 +2,7 @@
     <string name="app_name">Baby Guardian</string>
     <string name="back_button">Back</string>
     <string name="appwidget_text">Baby Guardian</string>
-    <string name="version">240219</string>
+    <string name="version">240306</string>
     <string name="build_type">beta</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="team_info">Team Baby Guardian: Weicheng Ao - Software; John Chen - Hardware; Yi Fang - Baby Crying Model; Yanzhi Shu - Baby Facial Expression Model; Kei Nagai - Hardware and ML Models</string>
@@ -177,6 +177,9 @@
     <string name="create_passkey">Create Passkey</string>
     <string name="registration_via_passkey_successful">Registration via Passkey Successful</string>
     <string name="registration_failed_one_user_can_only_have_one_passkey_if_this_is_an_error_please_try_again">Registration Failed, one user can only have one Passkey, if this is an error, please try again.</string>
+    <string name="what_things_that_i_need_to_take_care_when_baby_crying_or_not_sleep">What things that I need to take care when baby crying or not sleep?</string>
+    <string name="submit_1">Submit</string>
+    <string name="open_in_new">View Model in 3D</string>
     <array name="com_google_android_gms_fonts_certs">
         <item>@array/com_google_android_gms_fonts_certs_dev</item>
         <item>@array/com_google_android_gms_fonts_certs_prod</item>

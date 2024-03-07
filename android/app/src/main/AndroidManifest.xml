@@ -39,6 +39,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BabyGuardian"
         android:usesCleartextTraffic="true"
+        android:windowSoftInputMode="adjustResize"
         tools:targetApi="34"
         android:foregroundServiceType="dataSync">
 <!--        <meta-data android:name="asset_statements" android:resource="@string/asset_statements" />-->

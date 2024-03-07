@@ -8,9 +8,6 @@ plugins {
 android {
     signingConfigs {
         getByName("debug") {
-            storeFile = file("C:\\Users\\weicheng\\baby_guardian.jks")
-            storePassword = ""
-            keyPassword = ""
             keyAlias = "key0"
         }
     }
@@ -25,8 +22,8 @@ android {
         applicationId = "team.baby.guardian"
         minSdk = 31
         targetSdk = 34
-        versionCode = 6
-        versionName = "240219.beta"
+        versionCode = 7
+        versionName = "240306.beta"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -146,4 +143,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+
+    // Compose for Wear OS Dependencies
+    implementation("androidx.wear.compose:compose-material:1.3.0")
+    // Foundation is additive, so you can use the mobile version in your Wear OS app.
+    implementation("androidx.wear.compose:compose-foundation:1.3.0")
+    // Wear OS preview annotations
+    implementation("androidx.wear.compose:compose-ui-tooling:1.3.0")
+    implementation("androidx.wear.compose:compose-navigation:1.3.0")
 }

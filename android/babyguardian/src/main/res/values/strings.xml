@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Baby Guardian</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Baby Guardian Wear,\nHello, %1$s!</string>
+    <string name="tile_label">Example tile</string>
+    <string name="complication_label">Example complication</string>
+    <string name="alert">"Alert: "</string>
+    <string name="your_day_is_clear_for_now_nothing_needs_attention_have_a_wonderful_day">your_day_is_clear_for_now_nothing_needs_attention_have_a_wonderful_day</string>
+    <string name="temperature_c_1">Temperature</string>
+    <string name="humidity_1">Humidity</string>
+    <string name="humidity_threshold">Humidity Threshold</string>
+    <string name="last_seen">"Last Seen "</string>
+    <string name="hours_and_minutes_ago" />
+    <string name="days_and_hours_and_minutes_ago" />
+    <string name="device_offline">Device Offline</string>
+    <string name="device_online">Device Online</string>
+    <string name="high_latency">High Latency</string>
+    <string name="device_may_be_offline">Maybe Offline</string>
+    <plurals name="seconds_ago" />
+    <plurals name="minutes_ago" />
+</resources>

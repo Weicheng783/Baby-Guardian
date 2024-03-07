@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Baby Guardian"
 include(":app")
- 
+include(":babyguardian")

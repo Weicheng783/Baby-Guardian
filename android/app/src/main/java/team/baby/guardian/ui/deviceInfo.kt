@@ -166,7 +166,7 @@ fun DeviceListScreen(navController: NavController, username: String) {
     var parametersList by remember { mutableStateOf("".split(",").map { it.trim() }) }
 
     var requestResult by remember { mutableStateOf("") }
-    var friend_username by remember { mutableStateOf("hi") }
+    var friend_username by remember { mutableStateOf("") }
 
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -678,6 +678,7 @@ fun DeviceListScreen(navController: NavController, username: String) {
                                     )
                                 )
                             }
+                            Spacer(modifier = Modifier.height(16.dp))
                         }
                         ClickableDeviceLatestPhoto(navController, device.serialNumber, device.modelDescription, device.ownerStatus, context)
                         Spacer(modifier = Modifier.height(16.dp))

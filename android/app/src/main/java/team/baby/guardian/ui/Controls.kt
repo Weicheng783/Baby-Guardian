@@ -273,7 +273,7 @@ fun Controls(deviceSerial: String) {
             onClick = { showConfirmationDialog_a = true },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(stringResource(R.string.submit))
+            Text(stringResource(R.string.submit_1))
         }
     }
 }

@@ -82,10 +82,9 @@ fun GeminiUI(useCase: String, inputAlt: String, imageUriAlt: String, hideInput: 
     }
 
     var isLoading by remember { mutableStateOf(false) }
-    var input by remember { mutableStateOf("What things that I need to take care when baby crying or not sleep?") }
-    if(language == "zh"){
-        input = "当婴儿总是哭泣和吵闹不睡觉的时候，我需要注意什么?"
-    }
+    val inputt = stringResource(R.string.what_things_that_i_need_to_take_care_when_baby_crying_or_not_sleep)
+    var input by remember { mutableStateOf(inputt) }
+
     var mode by remember { mutableStateOf(useCase) }
     if(mode == "latest_image"){
         mode = "image"
@@ -221,7 +220,9 @@ fun GeminiUI(useCase: String, inputAlt: String, imageUriAlt: String, hideInput: 
                     }
                 },
                 label = { Text(stringResource(R.string.image_uri_optional)) },
-                modifier = Modifier.fillMaxWidth(0.9f).padding(bottom = 16.dp)
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .padding(bottom = 16.dp)
             )
         }
 

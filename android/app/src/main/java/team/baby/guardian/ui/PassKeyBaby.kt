@@ -2,6 +2,7 @@ package team.baby.guardian.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Icon.createWithResource
 import android.os.Handler
 import android.os.Looper
@@ -72,6 +73,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONObject
 import team.baby.guardian.AlertDialogExample
+import team.baby.guardian.MainActivity
 import team.baby.guardian.R
 import team.baby.guardian.passkeys.DataProvider
 import team.baby.guardian.passkeys.readFromAsset
@@ -326,6 +328,8 @@ fun PassKeyBaby(username: String, password: String) {
                 if(loginResult) {
                     // Login successful, display a message
                     Text(stringResource(R.string.login_successful))
+                    context.startActivity(Intent(context, MainActivity::class.java))
+                    (context as MainActivity).finish()
                 }else{
                     // Login unsuccessful, display an error message
                     Text(stringResource(R.string.login_failed))
