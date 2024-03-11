@@ -25,7 +25,6 @@
     <!--    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />-->
     <!--    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />-->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -63,10 +62,19 @@
             </intent-filter>
         </receiver>
         <activity
+            android:name=".ui.PiPActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:supportsPictureInPicture="true">
+            <!-- Add other necessary attributes -->
+        </activity>
+
+        <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:theme="@style/Theme.BabyGuardian"
             android:exported="true"
+            android:supportsPictureInPicture="true"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

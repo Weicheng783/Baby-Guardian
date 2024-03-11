@@ -20,6 +20,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Lock
@@ -259,6 +260,7 @@ fun LoginElements(userLogged: String) {
             fontFamily = fontFamilyTitle
 //                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
         )
+        Spacer(modifier = Modifier.height(10.dp))
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_foreground),
             contentDescription = null,
@@ -312,7 +314,7 @@ fun LoginElements(userLogged: String) {
                         .height(56.dp)
                 ) {
                     Icon(
-                        imageVector = Icons.Default.ExitToApp,
+                        imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                         contentDescription = null,
                         modifier = Modifier.size(24.dp)
                     )

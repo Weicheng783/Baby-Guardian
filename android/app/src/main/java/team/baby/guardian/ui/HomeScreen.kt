@@ -8,6 +8,9 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
+import android.text.Layout
+import android.util.DisplayMetrics
+import android.view.WindowManager
 import androidx.annotation.RequiresExtension
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDp
@@ -31,6 +34,8 @@ import androidx.compose.material.icons.filled.Restore
 import androidx.compose.material.icons.filled.SignalCellularNodata
 import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material3.*
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +43,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
@@ -50,11 +56,12 @@ import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.createDataStore
 import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavController
-import team.baby.guardian.R
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
+import team.baby.guardian.R
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -63,11 +70,13 @@ import java.net.URL
 import java.time.LocalTime
 import kotlin.random.Random
 
-@SuppressLint("CoroutineCreationDuringComposition")
+
+@SuppressLint("CoroutineCreationDuringComposition", "UnusedBoxWithConstraintsScope")
 @RequiresExtension(extension = Build.VERSION_CODES.R, version = 2)
 @Composable
 fun HomeScreen(
     navController: NavController,
+    windowSizeClass: WindowSizeClass,
     modifier: Modifier = Modifier.background(MaterialTheme.colorScheme.background)
 ) {
     var result by remember { mutableStateOf<List<String>?>(null) }
@@ -121,7 +130,7 @@ fun HomeScreen(
         }
     }
 
-    Box(
+    BoxWithConstraints(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(state = scrollState)
@@ -134,219 +143,309 @@ fun HomeScreen(
                 focusManager.clearFocus()
             },
     ) {
-        Column(
-            modifier = modifier,
-//            verticalArrangement = Arrangement.SpaceBetween
-        ) {
+        var showTwoPane by remember { mutableStateOf(false) }
+        if(windowSizeClass.widthSizeClass == WindowWidthSizeClass.Medium || windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded){
+            showTwoPane = true
+        }
+        Row {
             Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-//                verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
+                modifier = modifier.weight(1f)
+                    .height(calculateUsableScreenHeightDp().dp)
+                    .verticalScroll(rememberScrollState()),
+                //            verticalArrangement = Arrangement.SpaceBetween
             ) {
-                val greeting by remember { mutableStateOf(getGreeting()) }
-                Surface(
-                    modifier = Modifier.padding(10.dp),
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    //                verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
                 ) {
+                    val greeting by remember { mutableStateOf(getGreeting()) }
+                    Surface(
+                        modifier = Modifier.padding(10.dp),
+                    ) {
+                        Text(
+                            text = stringResource(id = greeting),
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.headlineLarge
+                        )
+                    }
                     Text(
-                        text = stringResource(id = greeting),
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.headlineLarge
+                        text = stringResource(R.string.title_main),
+                        style = MaterialTheme.typography.headlineMedium,
+                        fontFamily = fontFamilyTitle,
+                        textAlign = TextAlign.Center
+                        //                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
                     )
-                }
-                Text(
-                    text = stringResource(R.string.title_main),
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontFamily = fontFamilyTitle
-//                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                val randomText = when (Random.nextInt(0, 10)) { // Assuming you have 10 sentences
-                    0 -> stringResource(R.string.affirm_1)
-                    1 -> stringResource(R.string.affirm_2)
-                    2 -> stringResource(R.string.affirm_3)
-                    3 -> stringResource(R.string.affirm_4)
-                    4 -> stringResource(R.string.affirm_5)
-                    5 -> stringResource(R.string.affirm_6)
-                    6 -> stringResource(R.string.affirm_7)
-                    7 -> stringResource(R.string.affirm_8)
-                    8 -> stringResource(R.string.affirm_9)
-                    9 -> stringResource(R.string.affirm_10)
-                    else -> "" // Handle any additional cases
-                }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    val randomText =
+                        when (Random.nextInt(0, 10)) { // Assuming you have 10 sentences
+                            0 -> stringResource(R.string.affirm_1)
+                            1 -> stringResource(R.string.affirm_2)
+                            2 -> stringResource(R.string.affirm_3)
+                            3 -> stringResource(R.string.affirm_4)
+                            4 -> stringResource(R.string.affirm_5)
+                            5 -> stringResource(R.string.affirm_6)
+                            6 -> stringResource(R.string.affirm_7)
+                            7 -> stringResource(R.string.affirm_8)
+                            8 -> stringResource(R.string.affirm_9)
+                            9 -> stringResource(R.string.affirm_10)
+                            else -> "" // Handle any additional cases
+                        }
 
-                Text(
-                    text = randomText,
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center,
-                    fontFamily = fontFamily,
-                )
+//                    if (windowSizeClass.heightSizeClass == WindowHeightSizeClass.Compact) {
+//                        Text(
+//                            text = "Compact",
+//                            fontSize = 20.sp,
+//                            textAlign = TextAlign.Center,
+//                            fontFamily = fontFamily,
+//                        )
+//                    } else if (windowSizeClass.heightSizeClass == WindowHeightSizeClass.Medium) {
+//                        Text(
+//                            text = "Medium",
+//                            fontSize = 20.sp,
+//                            textAlign = TextAlign.Center,
+//                            fontFamily = fontFamily,
+//                        )
+//                    } else if (windowSizeClass.heightSizeClass == WindowHeightSizeClass.Expanded) {
+//                        Text(
+//                            text = "Expanded",
+//                            fontSize = 20.sp,
+//                            textAlign = TextAlign.Center,
+//                            fontFamily = fontFamily,
+//                        )
+//                    }
+//
+//                    if (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact) {
+//                        Text(
+//                            text = "W Compact",
+//                            fontSize = 20.sp,
+//                            textAlign = TextAlign.Center,
+//                            fontFamily = fontFamily,
+//                        )
+//                    } else if (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Medium) {
+//                        Text(
+//                            text = "W Medium",
+//                            fontSize = 20.sp,
+//                            textAlign = TextAlign.Center,
+//                            fontFamily = fontFamily,
+//                        )
+//                    } else if (windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded) {
+//                        Text(
+//                            text = "W Expanded",
+//                            fontSize = 20.sp,
+//                            textAlign = TextAlign.Center,
+//                            fontFamily = fontFamily,
+//                        )
+//                    }
 
-//                AnimatedBackAnimationScreen()
+                    Text(
+                        text = randomText,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
+                        fontFamily = fontFamily,
+                    )
 
-//                Button(onClick = {
-//                    // Simulate a crash (for testing purposes only)
-//                    throw RuntimeException("Test Crash") // This line intentionally causes the app to crash
-//                }) {
-//                    Text(text = "Crash App")
-//                }
+                    //                AnimatedBackAnimationScreen()
 
-                if (isNotMeteredNetwork) {
-                    if (isFetchSuccessful) {
-                        // File fetched successfully
-                        ResultedUpdatesResults(
-                            result,
-                            false,
-                            result?.get(3).toBoolean(),
-                            context = LocalContext.current
-                        )
-                    } else {
-                        // File fetch unsuccessful
-                        AssistChipConstructor(
-                            text = stringResource(R.string.server_disconnected),
-                            icon = Icons.Filled.CloudOff
-                        )
-                        InternetNotConnectedPage(
-                            stringResource(R.string.no_internet_connection),
-                            stringResource(R.string.check_internet_text),
-                            Icons.Default.WifiOff
-                        )
-                    }
-                } else {
-                    if(isNetworkAvailable) {
-                        AssistChipConstructor(
-                            text = stringResource(R.string.cellular_or_metered_network_detected),
-                            icon = Icons.Filled.WifiOff
-                        )
-                        InternetNotConnectedPage(
-                            stringResource(R.string.no_cellular_allowed),
-                            stringResource(R.string.no_cellular_allowed_description),
-                            Icons.Default.SignalCellularNodata
-                        )
-                    } else {
-                        // File fetch unsuccessful
-                        AssistChipConstructor(
-                            text = stringResource(R.string.server_disconnected),
-                            icon = Icons.Filled.CloudOff
-                        )
-                        InternetNotConnectedPage(
-                            stringResource(R.string.no_internet_connection),
-                            stringResource(R.string.check_internet_text),
-                            Icons.Default.WifiOff
-                        )
-                    }
-                }
+                    //                Button(onClick = {
+                    //                    // Simulate a crash (for testing purposes only)
+                    //                    throw RuntimeException("Test Crash") // This line intentionally causes the app to crash
+                    //                }) {
+                    //                    Text(text = "Crash App")
+                    //                }
 
-                // Main Logic
-                // Check update forcing or not
-                if(markEnforcing != "true"){
-                    if(userLogged != ""){
-                        Text(
-                            text = stringResource(R.string.welcome) + userLogged,
-                            fontSize = 25.sp,
-                            textAlign = TextAlign.Center, // Center the text horizontally
-                            fontFamily = fontFamily // Example of specifying a font family
-                        )
-                    }
-                    else{
-                        Text(
-                            text = stringResource(R.string.guest_mode),
-                            fontSize = 25.sp,
-                            textAlign = TextAlign.Center, // Center the text horizontally
-                            fontFamily = fontFamily // Example of specifying a font family
-                        )
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(16.dp),
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Park,
-                                contentDescription = stringResource(R.string.please_login_first),
-                                modifier = Modifier
-                                    .size(120.dp)
-                                    .padding(16.dp)
+                    if (isNotMeteredNetwork) {
+                        if (isFetchSuccessful) {
+                            // File fetched successfully
+                            ResultedUpdatesResults(
+                                result,
+                                false,
+                                result?.get(3).toBoolean(),
+                                context = LocalContext.current
                             )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = stringResource(R.string.journey_starts_from_login),
-                                fontFamily = fontFamilyTitle,
-                                fontSize = 25.sp,
-//                            modifier = Modifier.padding(8.dp)
+                        } else {
+                            // File fetch unsuccessful
+                            AssistChipConstructor(
+                                text = stringResource(R.string.server_disconnected),
+                                icon = Icons.Filled.CloudOff
+                            )
+                            InternetNotConnectedPage(
+                                stringResource(R.string.no_internet_connection),
+                                stringResource(R.string.check_internet_text),
+                                Icons.Default.WifiOff
+                            )
+                        }
+                    } else {
+                        if (isNetworkAvailable) {
+                            AssistChipConstructor(
+                                text = stringResource(R.string.cellular_or_metered_network_detected),
+                                icon = Icons.Filled.WifiOff
+                            )
+                            InternetNotConnectedPage(
+                                stringResource(R.string.no_cellular_allowed),
+                                stringResource(R.string.no_cellular_allowed_description),
+                                Icons.Default.SignalCellularNodata
+                            )
+                        } else {
+                            // File fetch unsuccessful
+                            AssistChipConstructor(
+                                text = stringResource(R.string.server_disconnected),
+                                icon = Icons.Filled.CloudOff
+                            )
+                            InternetNotConnectedPage(
+                                stringResource(R.string.no_internet_connection),
+                                stringResource(R.string.check_internet_text),
+                                Icons.Default.WifiOff
                             )
                         }
                     }
-                }else{
-                    InternetNotConnectedPage(
-                        stringResource(R.string.software_update_enforcing),
-                        stringResource(R.string.dear_baby_guardian_you_must_install_this_software_update_to_continue_using_this_app_we_are_enforcing_this_because_we_have_major_updates_about_the_system_architecture_database_etc_and_the_latest_security_updates_please_catch_up_you_have_left_behind_see_you_in_the_next_update),
-                        Icons.Default.Download
+
+                    // Main Logic
+                    // Check update forcing or not
+                    if (markEnforcing != "true") {
+                        if (userLogged != "") {
+                            Text(
+                                text = stringResource(R.string.welcome) + userLogged,
+                                fontSize = 25.sp,
+                                textAlign = TextAlign.Center, // Center the text horizontally
+                                fontFamily = fontFamily // Example of specifying a font family
+                            )
+                        } else {
+                            Text(
+                                text = stringResource(R.string.guest_mode),
+                                fontSize = 25.sp,
+                                textAlign = TextAlign.Center, // Center the text horizontally
+                                fontFamily = fontFamily // Example of specifying a font family
+                            )
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(16.dp),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Park,
+                                    contentDescription = stringResource(R.string.please_login_first),
+                                    modifier = Modifier
+                                        .size(120.dp)
+                                        .padding(16.dp)
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(
+                                    text = stringResource(R.string.journey_starts_from_login),
+                                    fontFamily = fontFamilyTitle,
+                                    fontSize = 25.sp,
+                                    //                            modifier = Modifier.padding(8.dp)
+                                )
+                            }
+                        }
+                    } else {
+                        InternetNotConnectedPage(
+                            stringResource(R.string.software_update_enforcing),
+                            stringResource(R.string.dear_baby_guardian_you_must_install_this_software_update_to_continue_using_this_app_we_are_enforcing_this_because_we_have_major_updates_about_the_system_architecture_database_etc_and_the_latest_security_updates_please_catch_up_you_have_left_behind_see_you_in_the_next_update),
+                            Icons.Default.Download
+                        )
+                        Column(
+                            modifier = Modifier.fillMaxWidth(0.9f)
+                        ) {
+                            Section4()
+                        }
+                    }
+
+                    if (userLogged != "" && markEnforcing != "true") {
+                        DeviceListScreen(navController, userLogged)
+                    }
+
+                    if (userLogged != "" && markEnforcing != "true") {
+                        GeminiUI("full", "", "", false)
+                    }
+
+                    if (userLogged != "" && markEnforcing != "true") {
+                        UnrealViewer()
+                    }
+
+                    Text(
+                        text = stringResource(R.string.contributions),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center, // Center the text horizontally
+                        fontFamily = fontFamily // Example of specifying a font family
                     )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = stringResource(R.string.acknowledgments),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center, // Center the text horizontally
+                        fontFamily = fontFamily // Example of specifying a font family
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = stringResource(R.string.last_sentence),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center, // Center the text horizontally
+                        fontFamily = fontFamily // Example of specifying a font family
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = stringResource(R.string.opensourceinfo),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center, // Center the text horizontally
+                        fontFamily = fontFamily // Example of specifying a font family
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = stringResource(id = R.string.version) + "." + stringResource(id = R.string.build_type),
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center, // Center the text horizontally
+                        fontFamily = fontFamily // Example of specifying a font family
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            }
+//             TODO: Add two panes view according to form factors
+            if (userLogged != "" && markEnforcing != "true") {
+                if(windowSizeClass.widthSizeClass == WindowWidthSizeClass.Expanded){
                     Column(
-                        modifier = Modifier.fillMaxWidth(0.9f)
+                        modifier = modifier
+                            .weight(1f)
+                            .fillMaxWidth()
+                            .height(calculateUsableScreenHeightDp().dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        //            verticalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Section4()
+//                    DeviceListScreen(navController, userLogged)
+//                    coroutineScope.launch {
+//                        saveSettings("serial_number", serialNumber)
+//                        saveSettings("device_name", deviceName)
+//                        saveSettings("owner_status", owner_status)
+//                    }
+//                    navController.navigate(ScreenHelpers.Sensor.name)
+                        SensorLiveView(serialNumber = "1", deviceName = "The Baby Guardian Uno", ownerStatus = "owner", context = LocalContext.current)
                     }
                 }
-
-                if(userLogged != "" && markEnforcing != "true"){
-                    DeviceListScreen(navController,userLogged)
-                }
-
-                if(userLogged != ""){
-                    GeminiUI("full","","",false)
-                }
-
-                UnrealViewer()
-
-                Text(
-                    text = stringResource(R.string.contributions),
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center, // Center the text horizontally
-                    fontFamily = fontFamily // Example of specifying a font family
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = stringResource(R.string.acknowledgments),
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center, // Center the text horizontally
-                    fontFamily = fontFamily // Example of specifying a font family
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = stringResource(R.string.last_sentence),
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center, // Center the text horizontally
-                    fontFamily = fontFamily // Example of specifying a font family
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Text(
-                    text = stringResource(R.string.opensourceinfo),
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center, // Center the text horizontally
-                    fontFamily = fontFamily // Example of specifying a font family
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
-
-                Text(
-                    text = stringResource(id = R.string.version) + "." + stringResource(id = R.string.build_type),
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center, // Center the text horizontally
-                    fontFamily = fontFamily // Example of specifying a font family
-                )
-
-                Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }
+}
+
+@SuppressLint("ServiceCast")
+@Composable
+fun calculateUsableScreenHeightDp(): Int {
+    val context = LocalContext.current
+    val windowManager = LocalView.current.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    val displayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(displayMetrics)
+    val density = LocalDensity.current.density
+    return (displayMetrics.heightPixels / density).toInt()
 }
 
 fun isMeteredNetwork(connectivityManager: ConnectivityManager): Boolean {
@@ -362,7 +461,6 @@ fun isNetworkAvailable(connectivityManager: ConnectivityManager): Boolean {
             (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
                     capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
 }
-
 
 @Composable
 fun InternetNotConnectedPage(largeText: String, contentText: String, imageVector: ImageVector) {
@@ -399,6 +497,7 @@ fun ResultedUpdatesResults(result: List<String>?, showButton: Boolean, chooseBet
     var markEnforcing by remember { mutableStateOf(false) }
     val versionNo = stringResource(id = R.string.version).toInt()
     val beta = stringResource(id = R.string.build_type) == "beta"
+    var coroutine = rememberCoroutineScope()
 
     if(markEnforcing || !markEnforcing){
         LaunchedEffect(Unit) {
@@ -503,6 +602,10 @@ fun ResultedUpdatesResults(result: List<String>?, showButton: Boolean, chooseBet
             }
             if(showButton){
                 Button(onClick = {
+                    coroutine.launch {
+                        saveUser("update_enforce", "")
+                        markEnforcing = false
+                    }
                     val webIntent: Intent =
                         Intent(Intent.ACTION_VIEW, Uri.parse(result.get(1) ?: ""))
                     try {
@@ -553,6 +656,10 @@ fun ResultedUpdatesResults(result: List<String>?, showButton: Boolean, chooseBet
             }
             if(showButton){
                 Button(onClick = {
+                    coroutine.launch {
+                        saveUser("update_enforce", "")
+                        markEnforcing = false
+                    }
                     val webIntent: Intent =
                         Intent(Intent.ACTION_VIEW, Uri.parse(result?.get(1) ?: ""))
                     try {

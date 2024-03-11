@@ -4,7 +4,7 @@
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Baby Guardian Wear,\nHello, %1$s!</string>
+    <string name="hello_world">Hello, %1$s!</string>
     <string name="tile_label">Example tile</string>
     <string name="complication_label">Example complication</string>
     <string name="alert">"Alert: "</string>
@@ -21,4 +21,9 @@
     <string name="device_may_be_offline">Maybe Offline</string>
     <plurals name="seconds_ago" />
     <plurals name="minutes_ago" />
+    <string name="good_night">Good Night 🌜💤</string>
+    <string name="good_morning_early">Good Morning 🌞💫</string>
+    <string name="good_morning_late">Good Morning 🌞💫</string>
+    <string name="good_afternoon">Good Afternoon 🌝</string>
+    <string name="good_evening">Good Evening 🌠</string>
 </resources>

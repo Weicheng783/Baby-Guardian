@@ -283,6 +283,7 @@ fun DeviceListScreen(navController: NavController, username: String) {
                             verticalAlignment = Alignment.CenterVertically
                         ){
                             items(1) { item ->
+                                Spacer(modifier = Modifier.width(8.dp))
                                 Button(
                                     onClick = {
                                         // Split keys and parameters strings into lists
@@ -315,6 +316,7 @@ fun DeviceListScreen(navController: NavController, username: String) {
                                             }
 
                                             if (device.ownerStatus == "owner") {
+                                                Spacer(modifier = Modifier.width(8.dp))
                                                 Text(
                                                     stringResource(R.string.remove_all_shared_friends),
                                                     modifier = Modifier.alpha(alpha)

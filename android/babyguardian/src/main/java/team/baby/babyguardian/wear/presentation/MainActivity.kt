@@ -163,6 +163,7 @@ import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import java.security.SecureRandom
+import java.time.LocalTime
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -263,6 +264,17 @@ fun DataScreen() {
     }
 }
 
+fun getGreeting(): Int {
+    return when (LocalTime.now()) {
+        in LocalTime.MIDNIGHT..LocalTime.of(5, 59) -> R.string.good_night
+        in LocalTime.of(6, 0)..LocalTime.of(8, 59) -> R.string.good_morning_early
+        in LocalTime.of(9, 0)..LocalTime.of(11, 59) -> R.string.good_morning_late
+        in LocalTime.of(12, 0)..LocalTime.of(17, 59) -> R.string.good_afternoon
+        in LocalTime.of(18, 0)..LocalTime.of(23, 59) -> R.string.good_evening
+        else -> R.string.good_morning_early // Strange Corner Case?
+    }
+}
+
 @OptIn(ExperimentalHorologistApi::class)
 @Composable
 fun GreetingScreen(greetingName: String, onShowList: () -> Unit, onShowData: () -> Unit) {
@@ -283,6 +295,20 @@ fun GreetingScreen(greetingName: String, onShowList: () -> Unit, onShowData: () 
                 .fillMaxSize()
         ) {
             item {
+                Text(
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colors.secondary,
+                    text = stringResource(id = getGreeting()),
+                    fontFamily = fontFamilyTitle
+                )
+//                Text(
+//                    text = stringResource(id = getGreeting()),
+//                    fontWeight = FontWeight.Bold,
+//                    style = androidx.compose.material3.MaterialTheme.typography.headlineLarge
+//                )
+            }
+            item {
                 Greeting(greetingName = greetingName)
             }
             item {
@@ -296,7 +322,7 @@ fun GreetingScreen(greetingName: String, onShowList: () -> Unit, onShowData: () 
             }
             item{
                 Spacer(Modifier.height(10.dp))
-                Text("240307.beta", textAlign = TextAlign.Center)
+                Text("240311.beta", textAlign = TextAlign.Center)
             }
             item {
                 Spacer(Modifier.height(10.dp))

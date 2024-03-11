@@ -1,15 +1,24 @@
 package team.baby.guardian.ui
 
 import android.annotation.SuppressLint
+import android.app.PictureInPictureParams
 import android.content.ComponentName
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
+import android.os.Bundle
 import android.util.Log
+import android.util.Rational
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LiveTv
+import androidx.compose.material.icons.filled.PictureInPicture
 import androidx.compose.material.icons.filled.WarningAmber
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +34,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.app.ComponentActivity
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.MimeTypes
@@ -40,6 +50,7 @@ import androidx.media3.ui.PlayerView
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import team.baby.guardian.R
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -145,7 +156,7 @@ fun MediaCard(
             .fillMaxWidth()
 //            .padding(16.dp)
     ) {
-        PlayerSection(mediaInfo, context, exoPlayer, mediaSession, b)
+        PlayerSection(mediaInfo, context, exoPlayer, mediaSession, b, index)
         val mediaItem = MediaItem.Builder()
             .setUri(mediaInfo.url)
             .setMimeType(mediaInfo.mimeType)
@@ -170,6 +181,117 @@ fun MediaCard(
     }
 }
 
+@SuppressLint("RestrictedApi")
+internal fun Context.findActivity(): ComponentActivity {
+    var context = this
+    while (context is ContextWrapper) {
+        if (context is ComponentActivity) return context
+        context = context.baseContext
+    }
+    throw IllegalStateException("Picture in picture should be called in the context of an Activity")
+}
+
+//fun enterPiPMode(){
+//    var aspectRadio = Rational(16,9)
+//    val params = PictureInPictureParams.Builder().setAspectRatio(aspectRadio).build()
+//    activity?.enterPictureInPictureMode(params)
+//}
+
+class PiPActivity : AppCompatActivity() {
+    @androidx.annotation.OptIn(UnstableApi::class) override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Hide the status bar.
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        // Remember that you should never show the action bar if the
+        // status bar is hidden, so hide that too if necessary.
+        actionBar?.hide()
+        setContentView(R.layout.activity_pip)
+
+//        var expPlayer1 = createExoPlayer(applicationContext)
+        var exoPlayer = ExoPlayer.Builder(applicationContext).build()
+
+        var sessionMap = SnapshotStateMap<Int, MediaSession>()
+        var serial = intent.getStringExtra("device_serial")
+        if (serial != null) {
+            Log.d("SERIAL", serial)
+        }else{
+            Log.d("SERIAL", "NULL!")
+        }
+
+        val mediaList = listOf(
+//        MediaInfo("Test", "https://storage.googleapis.com/exoplayer-test-media-0/Jazz_In_Paris.mp3", MimeTypes.BASE_TYPE_AUDIO, "Description 2"),
+            MediaInfo(
+                "1",
+                "http://weicheng.app:8080/live/baby_guardian_$serial.flv",
+                MimeTypes.VIDEO_FLV,
+                "http://weicheng.app:8080/live/baby_guardian_$serial.flv"
+            ),
+            MediaInfo(
+                "1",
+                "http://weicheng.app:8080/live/baby_guardian_audio_$serial.flv",
+                MimeTypes.AUDIO_AAC,
+                "http://weicheng.app:8080/live/baby_guardian_audio_$serial.flv"
+            ),
+            MediaInfo(
+                "1",
+                "http://weicheng.app:8080/live/baby_guardian_radio_$serial.flv",
+                MimeTypes.AUDIO_AAC,
+                "http://weicheng.app:8080/live/baby_guardian_radio_$serial.flv"
+            ),
+        )
+
+//        val mediaSession = sessionMap.getOrPut(2) {
+//            MediaSession.Builder(applicationContext, exoPlayer).setId("session_a_1").build()
+//        }
+
+        val mediaItem = MediaItem.Builder()
+            .setUri(mediaList[0].url)
+            .setMimeType(mediaList[0].mimeType)
+            .setMediaMetadata(
+                MediaMetadata.Builder()
+                    .setArtist(mediaList[0].description)
+                    .setTitle(mediaList[0].title)
+//                    .setArtworkUri(mediaInfo.url)
+                    .build()
+            )
+            .build()
+        exoPlayer.setMediaItems(listOf(mediaItem))
+        exoPlayer.prepare()
+
+        val playbackServiceComponent = ComponentName(applicationContext, PlaybackService::class.java)
+        val sessionToken = SessionToken(applicationContext, playbackServiceComponent)
+        val controllerFuture = MediaController.Builder(applicationContext, sessionToken).buildAsync()
+
+        exoPlayer.addListener(playbackStateListener(controllerFuture, mediaItem, exoPlayer, false))
+
+        // Initialize ExoPlayer and controls
+        val playerView = findViewById<PlayerView>(R.id.playerView)
+        val playerControlView = PlayerControlView(this)
+        enterPictureInPictureMode(
+            PictureInPictureParams.Builder()
+                .setAspectRatio(Rational(16, 9))
+//                .setSourceRectHint(sourceRectHint)
+                .setAutoEnterEnabled(true)
+                .build()
+        )
+        playerControlView.player = playerView.player
+        playerView.player = exoPlayer
+        playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
+        exoPlayer.playWhenReady = true
+        exoPlayer.play()
+        exoPlayer.repeatMode = Player.REPEAT_MODE_ALL;
+        playerControlView.player?.play()
+
+        // Add other setup for ExoPlayer and controls
+//        playerControlView.apply {
+//            player = playerView.player // Assuming exoPlayer is assigned to playerView.player
+//            showTimeoutMs = 0
+//            player?.play()
+//        }
+    }
+}
+
+
 @androidx.annotation.OptIn(UnstableApi::class)
 @Composable
 fun PlayerSection(
@@ -177,7 +299,8 @@ fun PlayerSection(
     context: Context,
     exoPlayer: ExoPlayer,
     mediaSession: MediaSession,
-    b: Boolean
+    b: Boolean,
+    index: Int
 ) {
     val playerView = remember {
         PlayerView(context)
@@ -211,10 +334,9 @@ fun PlayerSection(
         rotation += rotationChange
         offset += offsetChange
     }
-
-
     val density = LocalDensity.current.density
     val originalAspectRatio = 1920f / 1080f
+    var context_2: Context? = null
 
     Column(
         modifier = Modifier
@@ -226,12 +348,40 @@ fun PlayerSection(
             modifier = Modifier
                 .fillMaxSize()
                 .aspectRatio(originalAspectRatio)
+//                .onGloballyPositioned { layoutCoordinates ->
+//                    val builder = PictureInPictureParams.Builder()
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//                        builder.setAutoEnterEnabled(true)
+//                    }
+//                    context
+//                        .findActivity()
+//                        .setPictureInPictureParams(builder.build())
+//                }
         ) { view ->
-            PlayerControlView(context).apply {
+            context_2 = view.context
+            PlayerControlView(context_2!!).apply {
                 player = playerView.player // Assuming exoPlayer is assigned to playerView.player
                 showTimeoutMs = 0
             }
         }
+        // Inside MainActivity
+        Button(onClick = {
+            val intent = Intent(context_2, PiPActivity::class.java)
+            intent.putExtra("device_serial", (index+1).toString())
+            context_2?.startActivity(intent)
+        }) {
+            Icon(imageVector = Icons.Filled.PictureInPicture, contentDescription = "PictureInPicture Mode")
+            Spacer(Modifier.width(10.dp))
+            Text(text = stringResource(R.string.enter_pip_mode))
+        }
+
+//        Button(onClick = {
+//            context_2?.findActivity()?.enterPictureInPictureMode(
+//                PictureInPictureParams.Builder().build()
+//            )
+//        }) {
+//            Text(text = stringResource(R.string.enter_pip_mode))
+//        }
         if(!b){
             Spacer(modifier = Modifier.height(16.dp))
             Row (
