@@ -1,4 +1,7 @@
-# Baby-Guardian App
+# The Baby-Guardian Project
+
+## People: Team Baby Guardian
+[Weicheng](https://github.com/Weicheng783) - Software Part; John Chen - Hardware Part; Yi Fang - Baby Crying Detection ML Model; [Yanzhi Shu](https://github.com/Yenchk) - Baby Facial Expression Analysis ML Model.
 
 ## Overview
 
