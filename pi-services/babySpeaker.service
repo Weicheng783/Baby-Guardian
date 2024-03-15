@@ -1,0 +1,9 @@
+Description=Baby Guardian Sound Play Speaker Service
+
+[Service]
+ExecStart=/home/baby/Desktop/run_speaker.sh
+Restart=always
+User=baby
+
+[Install]
+WantedBy=default.target

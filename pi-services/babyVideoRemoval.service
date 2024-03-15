@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Video Manager
+
+[Service]
+ExecStart=/usr/bin/python3 /home/baby/Desktop/videoRemover.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target

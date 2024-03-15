@@ -1,0 +1,154 @@
+alert: id, device_serial, alert, type (emotion,cry,humidifier,diaper_change|sound_level,), status (d2u_sent,d2u_ack,saved,u2d_sent,u2d_ack), datetime, addition
+
+temp_humid: id, device_serial, datetime, temp, humid
+
+status: id, device_serial, datetime, status
+
+CREATE DATABASE IF NOT EXISTS baby;
+
+USE baby;
+
+CREATE TABLE IF NOT EXISTS guardian_user (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    userpassword VARCHAR(255) NOT NULL
+);
+
+USE baby;
+
+CREATE TABLE IF NOT EXISTS device (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    serial_number VARCHAR(255) NOT NULL,
+    model_description VARCHAR(255) NOT NULL,
+    registered_user_name VARCHAR(255),
+    activation_date DATE,
+    owner_status VARCHAR(255) NOT NULL DEFAULT 'owner',
+    UNIQUE KEY unique_device_user_status (serial_number, registered_user_name, owner_status)
+);
+
+CREATE TABLE alert (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    device_serial VARCHAR(255),
+    alert VARCHAR(255),
+    type VARCHAR(255),
+    status VARCHAR(255),
+    datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    addition VARCHAR(255),
+    UNIQUE KEY unique_condition (device_serial, type, status, datetime)
+);
+
+-- Create temp_humid table
+CREATE TABLE temp_humid (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    device_serial VARCHAR(255),
+    datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    temp VARCHAR(255),
+    humid VARCHAR(255)
+);
+
+-- Create trigger to automatically remove oldest entries
+DELIMITER //
+
+CREATE PROCEDURE insertTempHumidWithLimit(
+    IN p_device_serial VARCHAR(255),
+    IN p_temp VARCHAR(255),
+    IN p_humid VARCHAR(255),
+    OUT p_inserted_id INT
+)
+BEGIN
+    DECLARE entry_count INT;
+
+    -- Count the number of entries for the device_serial
+    SELECT COUNT(*) INTO entry_count
+    FROM temp_humid
+    WHERE device_serial = p_device_serial;
+
+    -- If more than 50 entries, remove the oldest one
+    IF entry_count >= 50 THEN
+        DELETE FROM temp_humid
+        WHERE device_serial = p_device_serial
+        ORDER BY datetime
+        LIMIT 1;
+    END IF;
+
+    -- Insert the new entry
+    INSERT INTO temp_humid (device_serial, temp, humid)
+    VALUES (p_device_serial, p_temp, p_humid);
+
+    -- Set the inserted ID
+    SELECT LAST_INSERT_ID() INTO p_inserted_id;
+END //
+
+DELIMITER ;
+
+
+
+CREATE TABLE status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    device_serial VARCHAR(255),
+    datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(255)
+);
+
+libcamera-vid --height 1080 --width 1920 --libav-audio 1 -t 0 -o - | ffmpeg -i - -c:v h264 -preset ultrafast -b:v 2M -c:a aac -b:a 192k -f flv rtmp://weicheng.app/live/baby_guardian_1 -vf fps=1/10 images/image_%03d.jpg
+
+libcamera-vid --height 1080 --width 1920 --libav-audio 1 -t 0 -o - | ffmpeg -i - -c:v h264 -preset ultrafast -b:v 2M -c:a aac -b:a 192k -f flv rtmp://weicheng.app/live/baby_guardian_1 -vf fps=1/3 images/image_%03d.jpg
+
+libcamera-vid --height 1080 --width 1920 --libav-audio 1 -t 0 -o - | \
+ffmpeg -i - -c:v h264 -preset ultrafast -b:v 2M -c:a aac -b:a 192k -f flv rtmp://weicheng.app/live/baby_guardian_1 -vf fps=1/3,drawtext=text='%{localtime}':fontsize=24:fontcolor=white:x=10:y=10 /home/baby/Desktop/images/image_%03d.jpg -c:v copy -f segment -segment_time 60 -segment_format mp4 -reset_timestamps 1 -strftime 1 /home/baby/Desktop/videos/video_%Y%m%d%H%M%S.mp4
+
+
+libcamera-vid --height 1080 --width 1920 --libav-audio 1 -t 0 -o - | ffmpeg -i - -c:v h264 -preset ultrafast -b:v 2M -c:a aac -b:a 192k -f rtsp rtsp://weicheng.app/live/baby_guardian_1 -vf fps=1/3,drawtext=text='%{localtime}':fontsize=24:fontcolor=white:x=10:y=10 /home/baby/Desktop/images/image_%03d.jpg -c:v copy -f segment -segment_time 60 -segment_format mp4 -reset_timestamps 1 -strftime 1 /home/baby/Desktop/videos/video_%Y%m%d%H%M%S.mp4
+
+
+    streaming_command = (
+        "libcamera-vid --height 1080 --width 1920 --libav-audio 1 -t 0 -o - | "
+        "ffmpeg -i - -c:v h264 -preset ultrafast -b:v 2M -c:a aac -b:a 192k -f flv "
+        "rtmp://weicheng.app/live/baby_guardian_1 -vf fps=1/3,drawtext=text='%{localtime}':fontsize=24:fontcolor=white:x=10:y=10 "
+        "/home/baby/Desktop/images/image_%03d.jpg -c:v copy -f segment -segment_time 60 -segment_format mp4 -reset_timestamps 1 -strftime 1 "
+        "/home/baby/Desktop/videos/video_%Y%m%d%H%M%S.mp4"
+    )
+
+
+cd /etc/systemd/system/
+sudo vim babyRegister.service
+sudo systemctl enable babyRegister.service
+sudo systemctl enable babyStreaming.service
+sudo systemctl start babyRegister.service
+sudo systemctl daemon-reload
+sudo systemctl restart babyRegister.service
+journalctl -u babyRegister.service
+journalctl -u babyAudioPush.service -f
+
+chmod +x capture_audio.sh push_audio.sh
+chmod +x /home/baby/Desktop/srs/trunk/objs/srs
+
+sudo pkill -f "libcamera-vid"
+
+scp cameratest.py baby@192.168.251.156:/home/baby/Desktop/
+
+sudo amixer -M sget PCM
+sudo amixer -q -M sset PCM 50%
+
+pops up a QR code with full brightness with a button to hide and repop the code, the QR code needs to contain the username and its app language. If the user has any device, use Card element to show the details of each device.
+
+give me a python script that, store a fixed string called "product_serial", say "1", and "model_description", say "the first", when there is no wifi connected or no internet connection, it continuously scans for a QR code as the following format: ssid=,password=,username=,userLanguage=,softwareVer=. Once it scanned, Parse them, use ssid and password to connect to a new wifi point, and check if the internet is resumed, 20s is the timeout, if the internet is resumed, do a HTTP POST request that put the serial number in "serial_number" and description in "model_description", and username in "username", parse and print the response, endpoint is "https://weicheng.app/baby_guardian/register.php"
+
+
+baby@raspberrypi:/etc/systemd/system $ cat babyStreaming.service 
+[Unit]
+Description=Baby Guardian Streaming Manager
+
+[Service]
+ExecStart=/usr/bin/python3 /home/baby/Desktop/stream.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target
+
+write a php (http POST) for alert table: when in insert mode, insert all fields, return its id. when in find mode, given an id, return in JSON that alert all info, or given an device_serial AND a type return all info entries, or given a device_serial AND a type AND a status return all entries. when in update mode, given an id and update its status, return its id. when in delete mode, given an id and delete that entry.
+
+for http POST request to https://weicheng.app/baby_guardian/alert.php with fields: mode to insert, device_serial needs to be given, alert is the input value except the file, type is the following according to drop down menu selected: soothing_level, sound, sound_level, humidifier_level. status is u2d_sent, addition is "".
+
+for newStatus, in addition, add the original id's id number alongside the user name, so the total logic is: first find all type of d2u_sent, and find all d2u_<username>_<id>, for each entry in d2u_sent list, if there is a corresponding entry found for it, do not do anything, if not, notify the user and pass it to the server, then return all d2u_<username>_<id>

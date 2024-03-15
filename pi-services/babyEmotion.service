@@ -1,0 +1,9 @@
+Description=Baby Guardian Baby Emotion Checker
+
+[Service]
+ExecStart=/home/baby/Desktop/run_baby_motion.sh
+Restart=always
+User=baby
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,2 @@
+v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=MJPG --set-ctrl brightness=128 --stream-mmap --stream-count=100 -d /dev/videoX | cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=mpjpeg,dst=:8080}' :demux=h264
+

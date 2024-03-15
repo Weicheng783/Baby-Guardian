@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Guardian Reboot Service
+
+[Service]
+ExecStart=/usr/bin/python3 /home/baby/Desktop/reboot.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target

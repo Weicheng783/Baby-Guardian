@@ -1,0 +1,13 @@
+{
+    "latest": "240311.beta",
+    "latest_beta": "240311.beta",
+    "versions": {
+        "240311.beta": {
+            "type": "beta",
+            "version": "240311.beta",
+            "download": "https://weicheng.app/baby_guardian/downloads/beta_240311.apk",
+            "force_update": "240306.beta",
+            "updates": "Welcome to Baby Guardian 240311 Developer Preview version, this is a pre-release version, I recommend every beta-tester updates the app. It includes latest UI change for large screen devices, foldables and Android TV. This release also adds a new \"PiP mode\", which means Picture in Picture mode, gives you an option to watch your baby even if you move to another app or back to screen. I have forced every tester to update the app because it is very important to see the state-of-the-art, especially in a group setting. Please update the App as instructed."
+        }
+    }
+}

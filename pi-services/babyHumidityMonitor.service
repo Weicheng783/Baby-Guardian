@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Guardian Humidity User Set Fetcher
+
+[Service]
+ExecStart=/usr/bin/python3 /home/baby/Desktop/tempHumid/fetchHumidity.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target

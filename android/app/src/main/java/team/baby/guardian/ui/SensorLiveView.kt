@@ -692,6 +692,10 @@ fun NotificationCard(
                     // Show video component
                     VideoComponent(url = notification.addition)
                 }
+                notification.addition.startsWith("https://") && notification.addition.endsWith(".png") -> {
+                    // Show image component
+                    ImageComponent(imageUrl = notification.addition)
+                }
                 notification.addition.startsWith("https://") && notification.addition.endsWith(".jpg") -> {
                     // Show image component
                     ImageComponent(imageUrl = notification.addition)

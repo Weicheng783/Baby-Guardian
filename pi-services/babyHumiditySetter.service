@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Guardian Humidity Manager
+
+[Service]
+ExecStart=/usr/bin/python3 /home/baby/Desktop/tempHumid/tempHumidFinal.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Guardian Sound Level Changer
+
+[Service]
+ExecStart=/home/baby/Desktop/run_sound_level.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Guardian Streaming Manager
+
+[Service]
+ExecStart=/usr/bin/python3 /home/baby/Desktop/latestPhoto.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target

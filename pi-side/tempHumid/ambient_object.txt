@@ -1,0 +1,2 @@
+Ambient: 26.66 C
+Object: 52.57 C

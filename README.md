@@ -76,6 +76,14 @@ Leverage the power of Generative-AI, specifically Google Gemini, to generate ins
 
 Prioritize privacy and security with passkeys for sign-up and log-in. Encrypt sensitive information to ensure a secure connection and protect your baby's data.
 
+## Baby Guardian Back-end (Pi-side with services and Server-side)
+
+pi-services should be installed to "/etc/systemd/system".
+
+back-end files are intended to be used and configured on a remote server that you own.
+
+pi-side files should be put under "/home/baby/Desktop", please follow the same folder structure.
+
 ## Getting Started
 
 Clone this project by using your ssh keys first, then navigate to the "android" folder, this is the source code of the project so far.

@@ -1,0 +1,92 @@
+cd ~/project && source bin/activate && cd ../Desktop
+
+scp -i .\sshk_wa.key C:\Users\weicheng\Desktop\guardian\beta.apk ubuntu@weicheng.app:/var/www/html/baby_guardian/downloads/beta.apk
+
+scp -i .\sshk_wa.key C:\Users\weicheng\Desktop\guardian\version.txt ubuntu@weicheng.app:/var/www/html/baby_guardian/version.txt
+
+scp -r face baby@192.168.251.156:/home/baby/Desktop/
+
+arecord -l
+
+lsof -i :3252
+
+**** List of CAPTURE Hardware Devices ****
+card 3: Device [USB PnP Sound Device], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+
+sudo modprobe snd-aloop
+arecord -D plughw:3,0 -f cd -t wav -d 10 - | tee >(ffmpeg -f wav -i - -acodec aac -strict experimental -f flv rtmp://weicheng.app/live/soundtest) >(aplay -D hw:Loopback,1,0)
+
+while true; do arecord -D plughw:3,0 -f cd -t wav - | ffmpeg -f wav -i - -acodec aac -strict experimental -f flv rtmp://weicheng.app/live/soundtest > /dev/null & aplay -D hw:Loopback,1,0; sleep 2; done;
+
+while true; do arecord -D plughw:3,0 -f cd -t wav - | \ ffmpeg -f wav -i - -af anlmdn=ns=20 -acodec aac -strict experimental -f flv rtmp://weicheng.app/live/soundtest > /dev/null & \ aplay -D hw:Loopback,1,0; sleep 2; done;
+
+arecord -D plughw:3,0 -f cd -t wav -d 999999999 | ffmpeg -f wav -i - -af lowpass=3000,highpass=200,afftdn=nf=-25 -acodec aac -strict experimental -f flv rtmp://weicheng.app/live/soundtest
+
+arecord -D $(arecord -l | grep -oP 'card [0-9]+:.*?USB PnP Sound Device' | awk '{gsub(/:/, ""); print "plughw:" $2}'),$(arecord -l | grep -oP 'device [0-9]+:.*?USB Audio \[USB Audio\]' | awk '{gsub(/:/, ""); print $2}' | tr ':' ',') -f cd -t wav -d 999999999 | ffmpeg -f wav -i - -af lowpass=3000,highpass=200,afftdn=nf=-25 -acodec aac -strict experimental -f flv rtmp://weicheng.app/live/soundtest
+
+if [ -z "$(arecord -L | grep 'Loopback')" ]; then pactl load-module module-loopback; fi; arecord -D $(arecord -l | grep -oP 'card [0-9]+:.*?USB PnP Sound Device' | awk '{gsub(/:/, ""); print "plughw:" $2}'),$(arecord -l | grep -oP 'device [0-9]+:.*?USB Audio \[USB Audio\]' | awk '{gsub(/:/, ""); print $2}' | tr ':' ',') -f cd -t wav -d 10 | ffmpeg -f wav -i - -af lowpass=3000,highpass=200,afftdn=nf=-25 -acodec aac -strict experimental -f flv rtmp://weicheng.app/live/soundtest
+
+
+fuser -v /dev/snd/*
+sudo fuser -k /dev/snd/pcmC0D0c
+sudo kill -9 4579
+
+pids=$(fuser -v /dev/snd/* 2>/dev/null | awk '{print $NF}' | tr '\n' ' '); if [ -n "$pids" ]; then echo "Killing processes using audio devices..."; for pid in $pids; do echo "Killing PID: $pid"; kill -9 "$pid"; done; echo "Processes killed."; else echo "No processes found using audio devices."; fi
+
+// Local Sound Processing
+while true; do arecord -D $(arecord -l | grep -oP 'card [0-9]+:.*?USB PnP Sound Device' | awk '{gsub(/:/, ""); print "plughw:" $2}'),$(arecord -l | grep -oP 'device [0-9]+:.*?USB Audio \[USB Audio\]' | awk '{gsub(/:/, ""); print $2}' | tr ':' ',') -f cd -t wav -d 999999999 | ffmpeg -f wav -i - -af lowpass=3000,highpass=200,afftdn=nf=-25 -acodec aac -strict experimental -f flv rtmp://localhost/live/sound; pids=$(fuser -v /dev/snd/* 2>/dev/null | awk '{print $NF}' | tr '\n' ' '); if [ -n "$pids" ]; then echo "Killing processes using audio devices..."; for pid in $pids; do echo "Killing PID: $pid"; kill -9 "$pid"; done; echo "Processes killed."; else echo "No processes found using audio devices."; fi; sleep 2; pids=$(fuser -v /dev/snd/* 2>/dev/null | awk '{print $NF}' | tr '\n' ' '); if [ -n "$pids" ]; then echo "Killing processes using audio devices..."; for pid in $pids; do echo "Killing PID: $pid"; kill -9 "$pid"; done; echo "Processes killed."; else echo "No processes found using audio devices."; fi; done;
+
+while :; do ffmpeg -i rtmp://localhost/live/sound -af "volume=2" -c:a aac -f flv rtmp://weicheng.app/live/baby_guardian_audio_1; sleep 2; done
+
+
+cd ~/project && source bin/activate && cd ../Desktop
+
+// Arduino Cli with Pi
+curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+
+export PATH=$PATH:/home/baby/bin
+
+echo 'export PATH=$PATH:/home/baby/bin' >> ~/.bashrc
+source ~/.bashrc
+
+arduino-cli core update-index
+
+arduino-cli board list
+
+baby@raspberrypi:~ $ arduino-cli config init
+Config file written to: /home/baby/.arduino15/arduino-cli.yaml
+
+
+lib_deps = 
+	adafruit/Adafruit MLX90614 Library@^2.1.5
+	adafruit/Adafruit BusIO@^1.15.0
+	SPI
+	arduino-libraries/Arduino_Sensorkit@^1.4.0
+	Wire
+	seeed-studio/Grove-3-Axis-Digital-Accelerometer-2g-to-16g-LIS3DHTR@^1.2.4
+	robtillaart/DHT20@^0.3.1
+这是所有sensor需要的library
+
+arduino-cli lib install --git-url https://github.com/adafruit/Adafruit-MLX90614-Library
+arduino-cli lib install --git-url https://github.com/adafruit/Adafruit_BusIO
+arduino-cli lib install Arduino_Sensorkit
+arduino-cli lib install Grove-3-Axis-Digital-Accelerometer-2g-to-16g-LIS3DHTR
+arduino-cli lib install --git-url https://github.com/RobTillaart/DHT20
+arduino-cli lib install U8g2
+
+arduino-cli compile --fqbn arduino:avr:uno
+arduino-cli upload -p /dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7513533363635191E150-if00 --fqbn arduino:avr:uno
+
+cat /dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7513533363635191E150-if00
+screen /dev/serial/by-id/usb-Arduino__www.arduino.cc__0043_7513533363635191E150-if00 9600
+
+
+baby@raspberrypi:~/Desktop $ vim open_srs.sh
+baby@raspberrypi:~/Desktop $ chmod +x open_srs.sh
+baby@raspberrypi:~/Desktop $ sudo cp open_srs.sh /etc/systemd/system/
+baby@raspberrypi:~/Desktop $ sudo systemctl enable open_srs.sh
+sudo vim /etc/systemd/system/babySRS.service
+sudo systemctl enable babySRS.service
+sudo systemctl start babySRS.service

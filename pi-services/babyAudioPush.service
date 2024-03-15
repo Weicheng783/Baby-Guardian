@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Guardian Audio Pushing Service
+
+[Service]
+ExecStart=/home/baby/Desktop/push_audio.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target

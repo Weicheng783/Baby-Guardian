@@ -1,0 +1,9 @@
+[Unit]
+Description=Baby Guardian SRS OSSRS Streaming Server
+
+[Service]
+ExecStart=/home/baby/Desktop/open_srs.sh
+User=baby
+
+[Install]
+WantedBy=default.target

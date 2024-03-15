@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Guardian Audio Capture Service
+
+[Service]
+ExecStart=/home/baby/Desktop/capture_audio.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target
