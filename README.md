@@ -11,7 +11,11 @@ This App is designed for a course called "Designing Sensor Systems", and it is t
 
 ![Slide2.PNG](Slide2.PNG)
 
-The hardware designed to interact with is: Raspberry Pi 4B with Raspberry Pi OS, Arduino Uno with Temperature and Humidity Sensors.
+The hardware designed to interact with is: Raspberry Pi 4B with Raspberry Pi OS, Arduino Uno with Temperature and Humidity Sensors. The RepRapDiscount Full Graphic Smart Controller for display.
+
+![a.JPG](a.JPG)
+
+![b.JPG](b.JPG)
 
 ![hardware.jpg](hardware.jpg)
 
