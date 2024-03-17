@@ -222,9 +222,10 @@ fun DeviceListScreen(navController: NavController, username: String) {
                         .padding(5.dp)
                         .fillMaxWidth(0.94f)
                         .clickable {
-                            showText_b = false
                             showText_a = false
+                            showText_b = false
                             showText_c = false
+                            showText_d = false
                         }
 //                        .fillMaxWidth(),
                 ) {

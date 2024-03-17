@@ -8,6 +8,7 @@ plugins {
 android {
     signingConfigs {
         getByName("debug") {
+            storeFile = file("C:\\Users\\weicheng\\baby_guardian.jks")
             keyAlias = "key0"
         }
     }
@@ -22,8 +23,8 @@ android {
         applicationId = "team.baby.guardian"
         minSdk = 31
         targetSdk = 34
-        versionCode = 7
-        versionName = "240306.beta"
+        versionCode = 9
+        versionName = "240316.beta"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -59,6 +60,7 @@ android {
     buildFeatures {
         compose = true
         viewBinding = true
+        //noinspection DataBindingWithoutKapt
         dataBinding = true
     }
     composeOptions {
@@ -151,4 +153,9 @@ dependencies {
     // Wear OS preview annotations
     implementation("androidx.wear.compose:compose-ui-tooling:1.3.0")
     implementation("androidx.wear.compose:compose-navigation:1.3.0")
+
+    implementation(libs.vico.compose)
+    implementation(libs.vico.compose.m2)
+    implementation(libs.vico.compose.m3)
+    implementation(libs.vico.core)
 }

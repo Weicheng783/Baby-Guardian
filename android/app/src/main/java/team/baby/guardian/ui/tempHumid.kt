@@ -37,8 +37,10 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -65,6 +67,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.datastore.preferences.core.preferencesKey
+import com.patrykandpatrick.vico.core.model.CartesianChartModelProducer
+import com.patrykandpatrick.vico.core.model.lineSeries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
@@ -564,6 +568,37 @@ fun StyledTemperatureHumidityData(tempHumidData: List<Pair<String, Pair<Float, F
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+//            val x = remember { mutableStateListOf<Int>() }
+//            val y = remember { mutableStateListOf<Float>() }
+//
+//            for (i in 0 until tempHumidData.size) {
+//                x.add(i + 1)
+//                val value = tempHumidData[i].second.first
+//                Log.d("DATA DATA", "Index: ${i + 1}, Value: $value")
+//                y.add(value)
+//            }
+//
+//            val xxx = x.toList()
+//            val yyy = y.toList()
+//
+//            val modelProducer = remember { CartesianChartModelProducer.build() }
+//
+//            // Update the chart when y changes
+//            DisposableEffect(yyy) {
+//                if (yyy.isNotEmpty() && yyy.size == tempHumidData.size) {
+//                    modelProducer.tryRunTransaction {
+//                        lineSeries {
+//                            series(xxx, yyy)
+//                        }
+//                    }
+//                }
+//                onDispose {
+//                    // Clean-up code if needed
+//                }
+//            }
+//
+//            DemoChart(modelProducer, Modifier)
+
             for (data in tempHumidData.reversed()) {
                 val datetime = data.first
                 val temperature = data.second.first

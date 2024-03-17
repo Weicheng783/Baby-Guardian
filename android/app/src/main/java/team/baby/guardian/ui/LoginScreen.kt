@@ -1,6 +1,7 @@
 package team.baby.guardian.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -78,6 +79,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONException
 import org.json.JSONObject
+import team.baby.guardian.MainActivity
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -435,6 +437,8 @@ fun LoginElements(userLogged: String) {
                     loginResult?.let {
                         // Login successful, display a message
                         Text(stringResource(R.string.login_successful))
+                        context.startActivity(Intent(context, MainActivity::class.java))
+                        (context as MainActivity).finish()
                     } ?: run {
                         // Login unsuccessful, display an error message
                         Text(stringResource(R.string.login_failed))

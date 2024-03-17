@@ -7,18 +7,18 @@
       </entry>
       <entry key="babyguardian">
         <State>
-          <runningDeviceTargetSelectedWithDropDown>
+          <targetSelectedWithDropDown>
             <Target>
-              <type value="RUNNING_DEVICE_TARGET" />
+              <type value="QUICK_BOOT_TARGET" />
               <deviceKey>
                 <Key>
-                  <type value="SERIAL_NUMBER" />
-                  <value value="b2143ee9" />
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="C:\Users\weicheng\.android\avd\Pixel_7_Pro_API_34.avd" />
                 </Key>
               </deviceKey>
             </Target>
-          </runningDeviceTargetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-03-15T02:56:04.436905600Z" />
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-17T03:13:48.108861Z" />
         </State>
       </entry>
     </value>

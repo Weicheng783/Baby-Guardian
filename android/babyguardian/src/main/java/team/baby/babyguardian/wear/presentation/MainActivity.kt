@@ -60,8 +60,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -91,6 +93,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.Typeface
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Devices
@@ -128,6 +131,33 @@ import com.google.android.horologist.compose.layout.ScreenScaffold
 import com.google.android.horologist.compose.layout.rememberColumnState
 import com.google.android.horologist.compose.material.Button
 import com.google.android.horologist.compose.rotaryinput.rotaryWithScroll
+import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
+import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
+import com.patrykandpatrick.vico.compose.chart.CartesianChartHost
+import com.patrykandpatrick.vico.compose.chart.layer.rememberLineCartesianLayer
+import com.patrykandpatrick.vico.compose.chart.layer.rememberLineSpec
+import com.patrykandpatrick.vico.compose.chart.rememberCartesianChart
+import com.patrykandpatrick.vico.compose.chart.zoom.rememberVicoZoomState
+import com.patrykandpatrick.vico.compose.component.rememberLayeredComponent
+import com.patrykandpatrick.vico.compose.component.rememberLineComponent
+import com.patrykandpatrick.vico.compose.component.rememberShapeComponent
+import com.patrykandpatrick.vico.compose.component.rememberTextComponent
+import com.patrykandpatrick.vico.compose.component.shape.dashedShape
+import com.patrykandpatrick.vico.compose.component.shape.markerCorneredShape
+import com.patrykandpatrick.vico.compose.component.shape.shader.color
+import com.patrykandpatrick.vico.compose.dimensions.dimensionsOf
+import com.patrykandpatrick.vico.core.chart.dimensions.HorizontalDimensions
+import com.patrykandpatrick.vico.core.chart.insets.Insets
+import com.patrykandpatrick.vico.core.component.marker.MarkerComponent
+import com.patrykandpatrick.vico.core.component.shape.Shapes
+import com.patrykandpatrick.vico.core.component.shape.cornered.Corner
+import com.patrykandpatrick.vico.core.component.shape.shader.DynamicShaders
+import com.patrykandpatrick.vico.core.component.text.TextComponent
+import com.patrykandpatrick.vico.core.context.MeasureContext
+import com.patrykandpatrick.vico.core.extension.copyColor
+import com.patrykandpatrick.vico.core.marker.Marker
+import com.patrykandpatrick.vico.core.model.CartesianChartModelProducer
+import com.patrykandpatrick.vico.core.model.lineSeries
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -164,6 +194,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.security.SecureRandom
 import java.time.LocalTime
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -322,7 +353,7 @@ fun GreetingScreen(greetingName: String, onShowList: () -> Unit, onShowData: () 
             }
             item{
                 Spacer(Modifier.height(10.dp))
-                Text("240311.beta", textAlign = TextAlign.Center)
+                Text("240316.beta", textAlign = TextAlign.Center)
             }
             item {
                 Spacer(Modifier.height(10.dp))
@@ -337,15 +368,26 @@ fun GreetingScreen(greetingName: String, onShowList: () -> Unit, onShowData: () 
                     ), label = "Notifications", onClick = onShowList
                 )
             }
-            item {
-                Spacer(Modifier.height(5.dp))
-            }
+//            item {
+//                Spacer(Modifier.height(5.dp))
+//            }
             item {
                 com.google.android.horologist.compose.material.Chip(
                     modifier = Modifier.fillMaxWidth(
                         0.8f
                     ), label = "Live Data", onClick = onShowData
                 )
+            }
+            item {
+                val x = (1..50).toList()
+
+                val modelProducer = remember { CartesianChartModelProducer.build() }
+                LaunchedEffect(Unit) {
+                    withContext(Dispatchers.Default) {
+                        modelProducer.tryRunTransaction { lineSeries { series(x, x.map { Random.nextFloat() * 15 }) } }
+                    }
+                }
+                DemoChart(modelProducer, Modifier)
             }
         }
     }
@@ -394,16 +436,16 @@ fun ListScreen() {
                     Text("Baby Guardian Central", color = customButtonColor)
                 }
             }
-            item {
-                TitleCard(title = { Text("Baby Crying") }, onClick = { }) {
-                    Text("Your baby is crying.\nThe reason might be: discomfort.\nPlease Check.")
-                    Button(
-                        imageVector = Icons.Default.Build,
-                        contentDescription = "Example Button",
-                        onClick = { }
-                    )
-                }
-            }
+//            item {
+//                TitleCard(title = { Text("Baby Crying") }, onClick = { }) {
+//                    Text("Your baby is crying.\nThe reason might be: discomfort.\nPlease Check.")
+//                    Button(
+//                        imageVector = Icons.Default.Build,
+//                        contentDescription = "Example Button",
+//                        onClick = { }
+//                    )
+//                }
+//            }
             items(notifications.size){notification ->
                 NotificationCard(notifications[notification], ownerStatus) {
                     // Handle dismiss button click
@@ -432,7 +474,7 @@ fun ListScreen() {
 //                Spacer(modifier = Modifier.height(10.dp))
             }
             item {
-                com.google.android.horologist.compose.material.Chip(label = "Example Chip", onClick = { })
+                com.google.android.horologist.compose.material.Chip(label = "Guardian 240317", onClick = { })
             }
             item {
                 Button(
@@ -527,82 +569,85 @@ data class NotificationItem(
     val addition: String
 )
 
+@OptIn(ExperimentalHorologistApi::class)
 @Composable
 fun NotificationCard(
     notification: NotificationItem,
     ownerStatus: String,
     onDismiss: () -> Unit
 ) {
-    Card(
+    TitleCard(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(),
 //            .padding(16.dp)
+        onClick = {},
+        title = {
+            Text(
+                text = notification.type,
+//                style = androidx.compose.material3.MaterialTheme.typography.headlineMedium.copy(
+//                    fontWeight = FontWeight.Bold
+//                ),
+                color = MaterialTheme.colors.secondary
+            )
+        }
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+//                .padding(16.dp)
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-//                    .padding(4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                androidx.compose.material3.Text(
-                    text = notification.type,
-                    style = androidx.compose.material3.MaterialTheme.typography.headlineMedium.copy(
-                        fontWeight = FontWeight.Bold
-                    ),
-                    color = androidx.compose.material3.MaterialTheme.colorScheme.primary
-                )
-
-                if(ownerStatus == "owner"){
-                    IconButton(onClick = onDismiss) {
-                        androidx.compose.material3.Icon(
-                            Icons.Default.Delete,
-                            contentDescription = "Dismiss"
-                        )
-                    }
-                }
-            }
+//            Row(
+//                modifier = Modifier
+//                    .fillMaxWidth(),
+////                    .padding(4.dp),
+//                horizontalArrangement = Arrangement.SpaceBetween
+//            ) {
+//                if(ownerStatus == "owner"){
+//                    Button(
+//                        imageVector = Icons.Default.Delete,
+//                        contentDescription = "Dismiss",
+//                        onClick = { }
+//                    )
+//                }
+//            }
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            androidx.compose.material3.Text(
+            Text(
                 text = notification.datetime,
-                style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colors.primary
+//                style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+//                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
             )
 
             Spacer(modifier = Modifier.height(4.dp))
 
-            androidx.compose.material3.Text(
+            Text(
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
                         append(stringResource(R.string.alert))
                     }
                     append(notification.alert)
                 },
-                style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+//                style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+//                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
+//            Spacer(modifier = Modifier.height(4.dp))
 
             // Show addition directly
-            androidx.compose.material3.Text(
-                text = notification.addition,
-                style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
-                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
-            )
+//            Text(
+//                text = notification.addition,
+////                style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+////                color = androidx.compose.material3.MaterialTheme.colorScheme.onSurface
+//            )
 
             when {
                 notification.addition.startsWith("https://") && notification.addition.endsWith(".mp4") -> {
                     // Show video component
                     VideoComponent(url = notification.addition)
                 }
-                notification.addition.startsWith("https://") && notification.addition.endsWith(".jpg") -> {
+                notification.addition.startsWith("https://") && (notification.addition.endsWith(".jpg") || notification.addition.endsWith(".png")) -> {
                     // Show image component
                     ImageComponent(imageUrl = notification.addition)
                 }
@@ -614,6 +659,102 @@ fun NotificationCard(
         }
     }
 }
+
+@Composable
+private fun DemoChart(
+    modelProducer: CartesianChartModelProducer,
+    modifier: Modifier,
+) {
+    val marker = rememberingMarker()
+    CartesianChartHost(
+        chart =
+        rememberCartesianChart(
+            rememberLineCartesianLayer(listOf(rememberLineSpec(DynamicShaders.color(Color(0xffa485e0))))),
+            startAxis = rememberStartAxis(),
+            bottomAxis = rememberBottomAxis(guideline = null),
+            persistentMarkers = mapOf(7f to marker),
+        ),
+        modelProducer = modelProducer,
+        modifier = modifier,
+        marker = marker,
+        zoomState = rememberVicoZoomState(zoomEnabled = false),
+    )
+}
+
+@Composable
+internal fun rememberingMarker(labelPosition: MarkerComponent.LabelPosition = MarkerComponent.LabelPosition.Top): Marker {
+    val labelBackgroundShape = Shapes.markerCorneredShape(Corner.FullyRounded)
+    val labelBackground =
+        rememberShapeComponent(labelBackgroundShape, MaterialTheme.colors.surface)
+            .setShadow(
+                radius = LABEL_BACKGROUND_SHADOW_RADIUS_DP,
+                dy = LABEL_BACKGROUND_SHADOW_DY_DP,
+                applyElevationOverlay = true,
+            )
+    val label =
+        rememberTextComponent(
+            color = MaterialTheme.colors.onSurface,
+            background = labelBackground,
+            padding = dimensionsOf(8.dp, 4.dp),
+            typeface = android.graphics.Typeface.MONOSPACE,
+        )
+    val indicatorFrontComponent = rememberShapeComponent(Shapes.pillShape, MaterialTheme.colors.surface)
+    val indicatorCenterComponent = rememberShapeComponent(Shapes.pillShape)
+    val indicatorRearComponent = rememberShapeComponent(Shapes.pillShape)
+    val indicator =
+        rememberLayeredComponent(
+            rear = indicatorRearComponent,
+            front =
+            rememberLayeredComponent(
+                rear = indicatorCenterComponent,
+                front = indicatorFrontComponent,
+                padding = dimensionsOf(5.dp),
+            ),
+            padding = dimensionsOf(10.dp),
+        )
+    val guideline =
+        rememberLineComponent(
+            color = MaterialTheme.colors.onSurface.copy(.2f),
+            thickness = 2.dp,
+            shape = Shapes.dashedShape(shape = Shapes.pillShape, dashLength = 8.dp, gapLength = 4.dp),
+        )
+    return remember(label, labelPosition, indicator, guideline) {
+        @SuppressLint("RestrictedApi")
+        object : MarkerComponent(label, labelPosition, indicator, guideline) {
+            init {
+                indicatorSizeDp = 36f
+                onApplyEntryColor = { entryColor ->
+                    indicatorRearComponent.color = entryColor.copyColor(alpha = .15f)
+                    with(indicatorCenterComponent) {
+                        color = entryColor
+                        setShadow(radius = 12f, color = entryColor)
+                    }
+                }
+            }
+
+            override fun getInsets(
+                context: MeasureContext,
+                outInsets: Insets,
+                horizontalDimensions: HorizontalDimensions,
+            ) {
+                with(context) {
+                    outInsets.top =
+                        (
+                                CLIPPING_FREE_SHADOW_RADIUS_MULTIPLIER * LABEL_BACKGROUND_SHADOW_RADIUS_DP -
+                                        LABEL_BACKGROUND_SHADOW_DY_DP
+                                )
+                            .pixels
+                    if (labelPosition == LabelPosition.AroundPoint) return
+                    outInsets.top += label.getHeight(context) + labelBackgroundShape.tickSizeDp.pixels
+                }
+            }
+        }
+    }
+}
+
+private const val LABEL_BACKGROUND_SHADOW_RADIUS_DP = 4f
+private const val LABEL_BACKGROUND_SHADOW_DY_DP = 2f
+private const val CLIPPING_FREE_SHADOW_RADIUS_MULTIPLIER = 1.4f
 
 @Composable
 fun AudioComponent(url: String) {
@@ -850,6 +991,8 @@ fun TempHumidDataFetcher(deviceSerial: String) {
 //    LineChart(tempHumidData, deviceSerial)
 //    Spacer(modifier = Modifier.height(5.dp))
     // Display the data in a scrollable table
+//    val x = (1..50).toList()
+//    var x = mutableListOf()
     val state = rememberScrollState()
     StyledTemperatureHumidityData(tempHumidData, state)
     Spacer(modifier = Modifier.height(5.dp))
@@ -875,6 +1018,38 @@ fun StyledTemperatureHumidityData(tempHumidData: List<Pair<String, Pair<Float, F
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            var xx = (1..50).toList()
+            val x = remember { mutableStateListOf<Int>() }
+            val y = remember { mutableStateListOf<Float>() }
+
+            for (i in 0 until tempHumidData.size) {
+                x.add(i + 1)
+                val value = tempHumidData[i].second.first
+                Log.d("DATA DATA", "Index: ${i + 1}, Value: $value")
+                y.add(value)
+            }
+
+            val xxx = x.toList()
+            val yyy = y.toList()
+
+            val modelProducer = remember { CartesianChartModelProducer.build() }
+
+            // Update the chart when y changes
+            DisposableEffect(yyy) {
+                if (yyy.isNotEmpty() && yyy.size == tempHumidData.size) {
+                    modelProducer.tryRunTransaction {
+                        lineSeries {
+                            series(xxx, yyy)
+                        }
+                    }
+                }
+                onDispose {
+                    // Clean-up code if needed
+                }
+            }
+
+            DemoChart(modelProducer, Modifier)
+
             for (data in tempHumidData.reversed()) {
                 val datetime = data.first
                 val temperature = data.second.first

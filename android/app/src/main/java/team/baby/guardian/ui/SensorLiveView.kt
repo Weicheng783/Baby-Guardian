@@ -2,6 +2,7 @@ package team.baby.guardian.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -60,6 +61,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -79,6 +81,32 @@ import coil.compose.rememberAsyncImagePainter
 import coil.imageLoader
 import coil.request.CachePolicy
 import coil.request.ImageRequest
+import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
+import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
+import com.patrykandpatrick.vico.compose.chart.CartesianChartHost
+import com.patrykandpatrick.vico.compose.chart.layer.rememberLineCartesianLayer
+import com.patrykandpatrick.vico.compose.chart.layer.rememberLineSpec
+import com.patrykandpatrick.vico.compose.chart.rememberCartesianChart
+import com.patrykandpatrick.vico.compose.chart.zoom.rememberVicoZoomState
+import com.patrykandpatrick.vico.compose.component.rememberLayeredComponent
+import com.patrykandpatrick.vico.compose.component.rememberLineComponent
+import com.patrykandpatrick.vico.compose.component.rememberShapeComponent
+import com.patrykandpatrick.vico.compose.component.rememberTextComponent
+import com.patrykandpatrick.vico.compose.component.shape.dashedShape
+import com.patrykandpatrick.vico.compose.component.shape.markerCorneredShape
+import com.patrykandpatrick.vico.compose.component.shape.shader.color
+import com.patrykandpatrick.vico.compose.dimensions.dimensionsOf
+import com.patrykandpatrick.vico.core.chart.dimensions.HorizontalDimensions
+import com.patrykandpatrick.vico.core.chart.insets.Insets
+import com.patrykandpatrick.vico.core.component.marker.MarkerComponent
+import com.patrykandpatrick.vico.core.component.shape.Shapes
+import com.patrykandpatrick.vico.core.component.shape.cornered.Corner
+import com.patrykandpatrick.vico.core.component.shape.shader.DynamicShaders
+import com.patrykandpatrick.vico.core.context.MeasureContext
+import com.patrykandpatrick.vico.core.extension.copyColor
+import com.patrykandpatrick.vico.core.marker.Marker
+import com.patrykandpatrick.vico.core.model.CartesianChartModelProducer
+import com.patrykandpatrick.vico.core.model.lineSeries
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -94,6 +122,7 @@ import org.json.JSONException
 import team.baby.guardian.R
 import java.io.IOException
 import java.security.SecureRandom
+import kotlin.random.Random
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -294,9 +323,115 @@ fun UpdateFrequencyWithSharedPreference() {
             fontFamily = fontFamilyTitle
         )
 
+        val x = (1..50).toList()
+
+        val modelProducer = remember { CartesianChartModelProducer.build() }
+        LaunchedEffect(Unit) {
+            withContext(Dispatchers.Default) {
+                modelProducer.tryRunTransaction { lineSeries { series(x, x.map { Random.nextFloat() * 15 }) } }
+            }
+        }
+        DemoChart(modelProducer, Modifier)
+
     }
 
 }
+
+@Composable
+fun DemoChart(
+    modelProducer: CartesianChartModelProducer,
+    modifier: Modifier,
+) {
+    val marker = rememberingMarker()
+    CartesianChartHost(
+        chart =
+        rememberCartesianChart(
+            rememberLineCartesianLayer(listOf(rememberLineSpec(DynamicShaders.color(Color(0xffa485e0))))),
+            startAxis = rememberStartAxis(),
+            bottomAxis = rememberBottomAxis(guideline = null),
+            persistentMarkers = mapOf(7f to marker),
+        ),
+        modelProducer = modelProducer,
+        modifier = modifier,
+        marker = marker,
+        zoomState = rememberVicoZoomState(zoomEnabled = false),
+    )
+}
+
+@Composable
+internal fun rememberingMarker(labelPosition: MarkerComponent.LabelPosition = MarkerComponent.LabelPosition.Top): Marker {
+    val labelBackgroundShape = Shapes.markerCorneredShape(Corner.FullyRounded)
+    val labelBackground =
+        rememberShapeComponent(labelBackgroundShape, androidx.wear.compose.material.MaterialTheme.colors.surface)
+            .setShadow(
+                radius = LABEL_BACKGROUND_SHADOW_RADIUS_DP,
+                dy = LABEL_BACKGROUND_SHADOW_DY_DP,
+                applyElevationOverlay = true,
+            )
+    val label =
+        rememberTextComponent(
+            color = androidx.wear.compose.material.MaterialTheme.colors.onSurface,
+            background = labelBackground,
+            padding = dimensionsOf(8.dp, 4.dp),
+            typeface = Typeface.MONOSPACE,
+        )
+    val indicatorFrontComponent = rememberShapeComponent(Shapes.pillShape, androidx.wear.compose.material.MaterialTheme.colors.surface)
+    val indicatorCenterComponent = rememberShapeComponent(Shapes.pillShape)
+    val indicatorRearComponent = rememberShapeComponent(Shapes.pillShape)
+    val indicator =
+        rememberLayeredComponent(
+            rear = indicatorRearComponent,
+            front =
+            rememberLayeredComponent(
+                rear = indicatorCenterComponent,
+                front = indicatorFrontComponent,
+                padding = dimensionsOf(5.dp),
+            ),
+            padding = dimensionsOf(10.dp),
+        )
+    val guideline =
+        rememberLineComponent(
+            color = androidx.wear.compose.material.MaterialTheme.colors.onSurface.copy(.2f),
+            thickness = 2.dp,
+            shape = Shapes.dashedShape(shape = Shapes.pillShape, dashLength = 8.dp, gapLength = 4.dp),
+        )
+    return remember(label, labelPosition, indicator, guideline) {
+        @SuppressLint("RestrictedApi")
+        object : MarkerComponent(label, labelPosition, indicator, guideline) {
+            init {
+                indicatorSizeDp = 36f
+                onApplyEntryColor = { entryColor ->
+                    indicatorRearComponent.color = entryColor.copyColor(alpha = .15f)
+                    with(indicatorCenterComponent) {
+                        color = entryColor
+                        setShadow(radius = 12f, color = entryColor)
+                    }
+                }
+            }
+
+            override fun getInsets(
+                context: MeasureContext,
+                outInsets: Insets,
+                horizontalDimensions: HorizontalDimensions,
+            ) {
+                with(context) {
+                    outInsets.top =
+                        (
+                                CLIPPING_FREE_SHADOW_RADIUS_MULTIPLIER * LABEL_BACKGROUND_SHADOW_RADIUS_DP -
+                                        LABEL_BACKGROUND_SHADOW_DY_DP
+                                )
+                            .pixels
+                    if (labelPosition == LabelPosition.AroundPoint) return
+                    outInsets.top += label.getHeight(context) + labelBackgroundShape.tickSizeDp.pixels
+                }
+            }
+        }
+    }
+}
+
+private const val LABEL_BACKGROUND_SHADOW_RADIUS_DP = 4f
+private const val LABEL_BACKGROUND_SHADOW_DY_DP = 2f
+private const val CLIPPING_FREE_SHADOW_RADIUS_MULTIPLIER = 1.4f
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable

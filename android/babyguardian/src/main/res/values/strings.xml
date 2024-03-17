@@ -19,8 +19,8 @@
     <string name="device_online">Device Online</string>
     <string name="high_latency">High Latency</string>
     <string name="device_may_be_offline">Maybe Offline</string>
-    <plurals name="seconds_ago" />
-    <plurals name="minutes_ago" />
+<!--    <plurals name="seconds_ago" />-->
+<!--    <plurals name="minutes_ago" />-->
     <string name="good_night">Good Night 🌜💤</string>
     <string name="good_morning_early">Good Morning 🌞💫</string>
     <string name="good_morning_late">Good Morning 🌞💫</string>
