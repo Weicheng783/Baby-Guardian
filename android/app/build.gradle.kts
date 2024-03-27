@@ -25,8 +25,8 @@ android {
         applicationId = "team.baby.guardian"
         minSdk = 31
         targetSdk = 34
-        versionCode = 9
-        versionName = "240316.beta"
+        versionCode = 10
+        versionName = "240326.beta"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
