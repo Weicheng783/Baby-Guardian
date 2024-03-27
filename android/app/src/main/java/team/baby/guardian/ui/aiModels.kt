@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.NewReleases
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.ArrowDownward
 import androidx.compose.material.icons.outlined.ArrowUpward
+import androidx.compose.material.icons.outlined.AutoAwesome
 import androidx.compose.material.icons.outlined.NewReleases
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
@@ -255,7 +256,7 @@ fun GeminiUI(useCase: String, inputAlt: String, imageUriAlt: String, hideInput: 
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Icon(imageVector = Icons.Outlined.NewReleases, contentDescription = null)
+                    Icon(imageVector = Icons.Outlined.AutoAwesome, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
                     if(useCase != "latest_image"){
                         Spacer(modifier = Modifier.width(8.dp))

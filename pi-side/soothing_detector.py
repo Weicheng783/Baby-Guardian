@@ -22,7 +22,7 @@ def parse_response(response):
 
 def save_to_file(alert):
     if alert and alert.isdigit():
-        with open("soothing_intensity.txt", "w") as file:
+        with open("/home/baby/Desktop/soothing_intensity.txt", "w") as file:
             file.write(alert)
             print(f"Saved alert to soothing_intensity.txt")
 

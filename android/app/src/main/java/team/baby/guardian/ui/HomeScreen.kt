@@ -56,6 +56,7 @@ import androidx.core.content.ContextCompat
 import androidx.datastore.preferences.createDataStore
 import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavController
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -149,7 +150,8 @@ fun HomeScreen(
         }
         Row {
             Column(
-                modifier = modifier.weight(1f)
+                modifier = modifier
+                    .weight(1f)
                     .height(calculateUsableScreenHeightDp().dp)
                     .verticalScroll(rememberScrollState()),
                 //            verticalArrangement = Arrangement.SpaceBetween
@@ -361,9 +363,10 @@ fun HomeScreen(
                         GeminiUI("full", "", "", false)
                     }
 
-                    if (userLogged != "" && markEnforcing != "true") {
-                        UnrealViewer()
-                    }
+                    // Disable Unreal Viewer starting from 240317 as it is no longer needed.
+//                    if (userLogged != "" && markEnforcing != "true") {
+//                        UnrealViewer()
+//                    }
 
                     Text(
                         text = stringResource(R.string.contributions),
@@ -385,15 +388,6 @@ fun HomeScreen(
 
                     Text(
                         text = stringResource(R.string.last_sentence),
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center, // Center the text horizontally
-                        fontFamily = fontFamily // Example of specifying a font family
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Text(
-                        text = stringResource(R.string.opensourceinfo),
                         fontSize = 20.sp,
                         textAlign = TextAlign.Center, // Center the text horizontally
                         fontFamily = fontFamily // Example of specifying a font family
@@ -423,11 +417,7 @@ fun HomeScreen(
                         //            verticalArrangement = Arrangement.SpaceBetween
                     ) {
 //                    DeviceListScreen(navController, userLogged)
-//                    coroutineScope.launch {
-//                        saveSettings("serial_number", serialNumber)
-//                        saveSettings("device_name", deviceName)
-//                        saveSettings("owner_status", owner_status)
-//                    }
+                        var coroutineScope = rememberCoroutineScope();
 //                    navController.navigate(ScreenHelpers.Sensor.name)
                         SensorLiveView(serialNumber = "1", deviceName = "The Baby Guardian Uno", ownerStatus = "owner", context = LocalContext.current)
                     }

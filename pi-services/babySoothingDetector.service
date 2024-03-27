@@ -1,0 +1,10 @@
+[Unit]
+Description=Baby Soothing Intensity Detector
+
+[Service]
+ExecStart=/usr/bin/python3 /home/baby/Desktop/soothing_detector.py
+Restart=always
+User=root
+
+[Install]
+WantedBy=default.target

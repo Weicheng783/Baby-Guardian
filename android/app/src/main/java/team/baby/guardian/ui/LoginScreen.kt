@@ -401,7 +401,7 @@ fun LoginElements(userLogged: String) {
 
                 PassKeyBaby(username, password)
 
-                Spacer(modifier = Modifier.height(16.dp))
+//                Spacer(modifier = Modifier.height(16.dp))
 
                 Button(
                     onClick = {
@@ -463,7 +463,6 @@ fun LoginElements(userLogged: String) {
 
     }
 }
-
 
 suspend fun loginUser(url: String, username: String, password: String): List<String>? {
     if (!isInternetLocationReachable(url)) {

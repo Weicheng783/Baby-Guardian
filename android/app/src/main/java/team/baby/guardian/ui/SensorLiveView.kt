@@ -813,14 +813,15 @@ fun NotificationCard(
                 color = MaterialTheme.colorScheme.onSurface
             )
 
-            Spacer(modifier = Modifier.height(4.dp))
-
-            // Show addition directly
-            Text(
-                text = notification.addition,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+            if(notification.addition != ""){
+                Spacer(modifier = Modifier.height(4.dp))
+                // Show addition directly
+                Text(
+                    text = notification.addition,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
 
             when {
                 notification.addition.startsWith("https://") && notification.addition.endsWith(".mp4") -> {

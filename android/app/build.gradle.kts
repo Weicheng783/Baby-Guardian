@@ -9,6 +9,8 @@ android {
     signingConfigs {
         getByName("debug") {
             storeFile = file("C:\\Users\\weicheng\\baby_guardian.jks")
+            storePassword = "Awc02082611*"
+            keyPassword = "Awc02082611*"
             keyAlias = "key0"
         }
     }

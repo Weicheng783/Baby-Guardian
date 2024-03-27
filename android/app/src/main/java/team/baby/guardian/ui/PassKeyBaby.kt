@@ -433,7 +433,7 @@ fun PassKeyBaby(username: String, password: String) {
                 Text(text = stringResource(R.string.sign_up_with_passkey))
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+//            Spacer(modifier = Modifier.height(16.dp))
         }
 
         if(signedUserName != ""){
