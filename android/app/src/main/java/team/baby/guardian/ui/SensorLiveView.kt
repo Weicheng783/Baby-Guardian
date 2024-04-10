@@ -198,6 +198,8 @@ fun SensorLiveView(serialNumber: String, deviceName: String, ownerStatus: String
                     )
                 }
 
+                BabyHeatMap()
+
                 babyNotify(serialNumber, ownerStatus)
             }
         }

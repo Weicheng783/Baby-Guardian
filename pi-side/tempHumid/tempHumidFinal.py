@@ -35,7 +35,7 @@ def read_serial_line(timeout=5):
     GPIO.output(power_pin, GPIO.LOW)  # Turn off GPIO
     raise TimeoutError("Serial read timeout")
 
-def post_to_weicheng(temp, humid):
+def post_to_weicheng(temp, humid, matrix):
     payload = {
         "device_serial": "1",
         "mode": "insert",
@@ -44,6 +44,20 @@ def post_to_weicheng(temp, humid):
     }
     try:
         requests.post(weicheng_url, data=payload)
+    except Exception as e:
+        print(f"Error posting to Weicheng: {e}")
+
+    url = "https://weicheng.app/baby_guardian/alert.php"
+    payload = {
+        "mode": "insert",
+        "device_serial": "1",
+        "type": "TEMP_MATRIX",
+        "status": "matrix_sent",
+        "alert": matrix,
+        "addition": ""
+    }
+    try:
+        requests.post(url, data=payload)
     except Exception as e:
         print(f"Error posting to Weicheng: {e}")
 
@@ -114,6 +128,14 @@ try:
                         break
             print(f"Humidity: {humid_value} %")
 
+            # Read AMG8833 Temperature Matrix
+            while True:
+                line = read_serial_line()
+                print(line)
+                if "MATRIX =" in line:
+                    matrix = line
+                    break
+
             # Read ambient temperature
             # ambient_value = read_serial_line().split("=")[1].strip().split(" ")[0]
             # print(f"Ambient: {ambient_value} C")
@@ -127,7 +149,7 @@ try:
             #     file.write(f"Ambient: {ambient_value} C\nObject: {object_value} C")
 
             # Post to weicheng
-            post_to_weicheng(temp_value, humid_value)
+            post_to_weicheng(temp_value, humid_value, matrix)
 
             if(first_run):
                 time.sleep(10)
