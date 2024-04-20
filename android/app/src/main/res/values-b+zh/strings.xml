@@ -2,7 +2,7 @@
     <string name="app_name">宝贝卫士</string>
     <string name="back_button">返回</string>
     <string name="appwidget_text">宝贝卫士</string>
-    <string name="version">240410</string>
+    <string name="version">240420</string>
     <string name="build_type">beta</string>
     <string name="app_widget_description">这是小组件的说明</string>
     <string name="team_info">宝贝卫士团队: Weicheng Ao - Software; John Chen - Hardware; Yi Fang - Baby Crying Model; Yanzhi Shu - Baby Facial Expression Model; Kei Nagai - Hardware and ML Models</string>

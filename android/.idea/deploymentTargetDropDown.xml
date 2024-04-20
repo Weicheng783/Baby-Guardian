@@ -26,12 +26,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\weicheng\.android\avd\Pixel_7_Pro_API_34.avd" />
+                  <value value="C:\Users\weicheng\.android\avd\Wear_OS_Large_Round_API_33.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-03-17T03:13:48.108861Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-04-10T14:52:28.396517600Z" />
         </State>
       </entry>
     </value>

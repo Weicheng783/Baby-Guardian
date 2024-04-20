@@ -2,7 +2,7 @@
     <string name="app_name">Baby Guardian</string>
     <string name="back_button">Back</string>
     <string name="appwidget_text">Baby Guardian</string>
-    <string name="version">240410</string>
+    <string name="version">240420</string>
     <string name="build_type">beta</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="team_info">Team Baby Guardian: Weicheng Ao - Software; John Chen - Hardware; Yi Fang - Baby Crying Model; Yanzhi Shu - Baby Facial Expression Model; Kei Nagai - Hardware and ML Models</string>

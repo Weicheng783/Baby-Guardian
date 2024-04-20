@@ -191,20 +191,23 @@ private suspend fun fetchAlertsPeriodically(callback: (List<AlertResponse>) -> U
             .post(requestBody)
             .build()
 
-        try {
-            val response = withContext(Dispatchers.IO) {
-                client.newCall(request).execute()
-            }
+        // Use a background thread for network operations
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    client.newCall(request).execute()
+                }
 
-            val responseBody = response.body?.string()
+                val responseBody = response.body?.string()
 
-            if (!responseBody.isNullOrEmpty()) {
-                val json = Json { ignoreUnknownKeys = true }
-                val alerts = json.decodeFromString<List<AlertResponse>>(responseBody)
-                callback(alerts)
+                if (!responseBody.isNullOrEmpty()) {
+                    val json = Json { ignoreUnknownKeys = true }
+                    val alerts = json.decodeFromString<List<AlertResponse>>(responseBody)
+                    callback(alerts)
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
-        } catch (e: IOException) {
-            e.printStackTrace()
         }
 
         delay(30 * 1000L) // Delay for 30 seconds
